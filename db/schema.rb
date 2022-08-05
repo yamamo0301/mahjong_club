@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 2022_08_05_024658) do
     t.datetime "remember_created_at"
     t.string "name", null: false
     t.text "introduction"
-    t.string "prefectures", null: false
-    t.string "municipalities", null: false
+    t.integer "prefecture", null: false
+    t.string "municipality", null: false
     t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
