@@ -9,6 +9,16 @@
   </div>
 
   <div class="field">
+    <%= f.label :prefecture, "都道府県" %><br />
+    <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {include_blank: "---"} ) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :municipality, "市区町村" %><br />
+    <%= f.text_field :municipality %>
+  </div>
+
+  <div class="field">
     <%= f.label :email, "メールアドレス" %><br />
     <%= f.email_field :email, autocomplete: "email" %>
   </div>
