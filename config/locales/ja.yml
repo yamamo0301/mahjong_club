@@ -1,0 +1,8 @@
+ja:
+  enums:
+    rule:
+      calculation_status:
+        nothing: "計算しない"
+        subtraction_evenness: "平等に引く"
+        subtraction_top: "1位から引く"
+        subtraction_bottom: "最下位から引く"
