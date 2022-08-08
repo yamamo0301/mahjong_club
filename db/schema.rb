@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2022_08_07_140025) do
   end
 
   create_table "rules", force: :cascade do |t|
+    t.integer "user_id", null: false
     t.string "name", null: false
     t.integer "tip_point", default: 0, null: false
     t.integer "table_point", default: 0, null: false

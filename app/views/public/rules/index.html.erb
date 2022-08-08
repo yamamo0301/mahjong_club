@@ -1,1 +1,61 @@
 <h2>ルール一覧</h2>
+<% @rules.each do |rule| %>
+  <table>
+    <thead>
+      <tr>
+        <th>ルール名</th>
+        <th>チップポイント</th>
+        <th>テーブルポイント</th>
+        <th>テーブルポイント計算方法</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= rule.name %></td>
+        <td><%= rule.tip_point %></td>
+        <td><%= rule.table_point %></td>
+        <td><%= rule.calculation_statuses_i18n %></td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
+
+<h2>ルール設定</h2>
+<%= form_with model: @rule, url:'/rules', method: :post do |f| %>
+  <table>
+    <tr>
+      <th>ルール名</th>
+      <td><%= f.text_field :name %></td>
+    </tr>
+    <tr>
+      <th>チップポイント</th>
+      <td><%= f.text_field :tip_point %></td>
+    </tr>
+    <tr>
+      <th>テーブルポイント</th>
+      <td><%= f.text_field :table_point %></td>
+    </tr>
+    <tr>
+      <th>テーブルポイント計算方法</th>
+      <td>
+        <p>
+          <%= f.radio_button :calculation_status, "0" %>
+          <%= f.label :calculation_status, "計算しない" %>
+        </p>
+        <p>
+          <%= f.radio_button :calculation_status, "1" %>
+          <%= f.label :calculation_status, "平等に引く" %>
+        </p>
+        <p>
+          <%= f.radio_button :calculation_status, "2" %>
+          <%= f.label :calculation_status, "1位から引く" %>
+        </p>
+        <p>
+          <%= f.radio_button :calculation_status, "3" %>
+          <%= f.label :calculation_status, "最下位から引く" %>
+        </p>
+      </td>
+    </tr>
+  </table>
+  <%= f.submit "追加" %>
+<% end %>
