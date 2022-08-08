@@ -13,6 +13,6 @@ Rails.application.routes.draw do
   get 'about' => 'public/homes#about'
 
   scope module: :public do
-    get '/rules' => 'rules#index'
+    resources :rules, only: [:index, :create, :edit, :update]
   end
 end

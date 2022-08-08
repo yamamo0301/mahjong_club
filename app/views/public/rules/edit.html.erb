@@ -23,8 +23,10 @@
   <% end %>
 </table>
 
-<h2>ルール新規作成</h2>
-<%= form_with model: @rule, url:rules_path, method: :post do |f| %>
+<h2><%= link_to "ルール新規作成", rules_path %></h2>
+
+<h2>ルール編集</h2>
+<%= form_with model: @rule, url:rule_path, method: :patch do |f| %>
   <table>
     <tr>
       <th>ルール名</th>
@@ -60,5 +62,5 @@
       </td>
     </tr>
   </table>
-  <%= f.submit "追加" %>
+  <%= f.submit "更新" %>
 <% end %>
