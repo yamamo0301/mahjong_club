@@ -10,9 +10,12 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+    @user = User.new(profile_params)
+    @user.players.build
+    @user.save
+  end
 
   # GET /resource/edit
   # def edit
@@ -59,5 +62,11 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+  
+  
+  private
 
+  def profile_params
+    params.permit(:sign_up, keys: [:name, :prefecture_id, :municipality, players_attributes: [:name]])
+  end
 end

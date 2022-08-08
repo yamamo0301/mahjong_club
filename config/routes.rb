@@ -14,5 +14,6 @@ Rails.application.routes.draw do
 
   scope module: :public do
     resources :rules, only: [:index, :create, :edit, :update]
+    resources :players, only: [:index, :create, :edit, :update]
   end
 end

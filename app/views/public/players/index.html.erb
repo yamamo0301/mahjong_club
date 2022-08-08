@@ -1,0 +1,29 @@
+<h2>プレイヤー一覧</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>プレイヤー名</th>
+      <th></th>
+    </tr>
+  </thead>
+  <% @players.each do |player| %>
+  <tbody>
+    <tr>
+      <td><%= player.name %></td>
+      <td><%= link_to "編集", edit_player_path(player.id) %></td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>
+
+<h2>プレイヤー新規作成</h2>
+<%= form_with model: @player, url:players_path, method: :post do |f| %>
+  <table>
+    <tr>
+      <th>プレイヤー名</th>
+      <td><%= f.text_field :name %></td>
+    </tr>
+  </table>
+  <%= f.submit "追加" %>
+<% end %>

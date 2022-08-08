@@ -1,0 +1,31 @@
+<h2>プレイヤー一覧</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>プレイヤー名</th>
+      <th></th>
+    </tr>
+  </thead>
+  <% @players.each do |player| %>
+  <tbody>
+    <tr>
+      <td><%= player.name %></td>
+      <td><%= link_to "編集", edit_player_path(player.id) %></td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>
+
+<h2><%= link_to "プレイヤー新規作成", players_path %></h2>
+
+<h2>プレイヤー編集</h2>
+<%= form_with model: @player, url:player_path, method: :patch do |f| %>
+  <table>
+    <tr>
+      <th>プレーヤー名</th>
+      <td><%= f.text_field :name %></td>
+    </tr>
+    </table>
+  <%= f.submit "更新" %>
+<% end %>
