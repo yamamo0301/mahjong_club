@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_09_022628) do
+ActiveRecord::Schema.define(version: 2022_08_09_061822) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -47,6 +47,13 @@ ActiveRecord::Schema.define(version: 2022_08_09_022628) do
     t.integer "point", default: 0, null: false
     t.integer "tip", default: 0, null: false
     t.integer "rank", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "sheets", force: :cascade do |t|
+    t.integer "score_sheet_id", null: false
+    t.integer "player_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
