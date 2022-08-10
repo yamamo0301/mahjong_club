@@ -13,8 +13,9 @@ Rails.application.routes.draw do
   get 'about' => 'public/homes#about'
 
   scope module: :public do
-    resources :rules, only: [:index, :create, :edit, :update]
-    resources :players, only: [:index, :create, :edit, :update]
-    resources :score_sheets, only: [:new, :index, :show :create, :edit, :update]
+    resources :rules,        only: [:index, :create, :edit, :update]
+    resources :players,      only: [:index, :create, :edit, :update]
+    resources :score_sheets, only: [:new, :index, :show, :create, :edit, :update, :destroy]
+    resources :scores,       only: [:create]
   end
 end

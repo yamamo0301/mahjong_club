@@ -1,1 +1,35 @@
 <h2>スコアシート編集</h2>
+
+<table>
+  <thead>
+    <tr>
+      <% @score_sheet.sheets.each do |sheet| %>
+        <th><%= sheet.player.name %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% @score_sheet.scores.each do |score| %>
+        <td>
+          <%= score.point %>
+          <%= score.tip %>
+        </td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+
+<h2>スコア作成</h2>
+
+<%= form_with model: @score_form, url: scores_path, method: :post do |f| %>
+  <table>
+    <thead>
+      <tr>
+        <%= f.fields_for :scores do |i| %>
+          <td><%= f.text_field :point %></td>
+        <% end %>
+      </tr>
+    </thead>
+  </table>
+<% end %>

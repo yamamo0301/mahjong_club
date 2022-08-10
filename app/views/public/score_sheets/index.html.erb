@@ -7,27 +7,24 @@
       <th>参加者</th>
       <th>ルール</th>
       <th>コメント</th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
-  <tbody>
-    <% @score_sheets.each do |score_sheet| %>
-        <tr>
-          <td><%= link_to score_sheet.created_at.strftime("%Y-%m-%d"), score_sheet_path(score_sheet.id) %></td>
-          <td><%= order.customer.last_name + order.customer.first_name %></td>
-          <td>
-            <% order.order_details.each do |order_detail| %>
-              <% @total_amount += order_detail.amount %>
-            <% end %>
-            <%= @total_amount %>
-            <% @total_amount = 0 %>
-          </td>
-          <td><%= order.status_i18n %></td>
-        </tr>
-      <% end %>
+  <% @score_sheets.each do |score_sheet| %>
+    <tbody>
+      <tr>
+        <td><%= link_to score_sheet.created_at.strftime("%Y-%m-%d"), score_sheet_path(score_sheet.id) %></td>
+        <td>
+          <% score_sheet.sheets.each do |sheet| %>
+            <%= sheet.player.name %>
+          <% end %>
+        </td>
+        <td><%= score_sheet.rule.name %></td>
+        <td><%= score_sheet.comment %></td>
+        <td><%= link_to "編集", edit_score_sheet_path(score_sheet.id) %></td>
+        <td><%= link_to "削除", "/score_sheets/#{score_sheet.id}", method: :delete %></td>
+      </tr>
     </tbody>
-  </table>
-
-  <div class="paginate">
-    <%= paginate @orders %>
-  </div>
-</div>
+  <% end %>
+</table>
