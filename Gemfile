@@ -60,3 +60,5 @@ gem 'devise'
 gem 'active_hash'
 
 gem "enum_help"
+
+gem 'pry-rails'

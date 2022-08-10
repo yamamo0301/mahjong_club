@@ -5,9 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  
+
   belongs_to :prefecture
   has_many :rules, dependent: :destroy
   has_many :players, dependent: :destroy
+  has_many :score_sheets, dependent: :destroy
   accepts_nested_attributes_for :players
 end

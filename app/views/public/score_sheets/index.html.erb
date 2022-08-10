@@ -1,0 +1,33 @@
+<h2>スコアシート一覧</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>作成日</th>
+      <th>参加者</th>
+      <th>ルール</th>
+      <th>コメント</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @score_sheets.each do |score_sheet| %>
+        <tr>
+          <td><%= link_to score_sheet.created_at.strftime("%Y-%m-%d"), score_sheet_path(score_sheet.id) %></td>
+          <td><%= order.customer.last_name + order.customer.first_name %></td>
+          <td>
+            <% order.order_details.each do |order_detail| %>
+              <% @total_amount += order_detail.amount %>
+            <% end %>
+            <%= @total_amount %>
+            <% @total_amount = 0 %>
+          </td>
+          <td><%= order.status_i18n %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="paginate">
+    <%= paginate @orders %>
+  </div>
+</div>
