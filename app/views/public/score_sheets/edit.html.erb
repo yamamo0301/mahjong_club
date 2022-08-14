@@ -1,35 +1,100 @@
-<h2>スコアシート編集</h2>
+<div class="container">
 
-<table>
-  <thead>
-    <tr>
-      <% @score_sheet.sheets.each do |sheet| %>
-        <th><%= sheet.player.name %></th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <% @score_sheet.scores.each do |score| %>
-        <td>
-          <%= score.point %>
-          <%= score.tip %>
-        </td>
-      <% end %>
-    </tr>
-  </tbody>
-</table>
+  <h2>スコアシート編集</h2>
+  <%= @score_sheet.created_at.strftime("%Y-%m-%d") %>
+  <%= @score_sheet.rule.name %>
+  <div class="row">
+    <% @score_sheet.sheets.each do |sheet| %>
+      <div class="d-none d-md-block col-md-3">
+        <%= sheet.player.name %>
+      </div>
+    <% end %>
+  </div>
+  <div class="row">
+    <% @score_sheet.scores.each do |score| %>
+      <div class="d-block d-md-none"><%= score.player.name %></div>
+      <div class="col-md-3">
+        <div class="row">
+          <div class="col-4">
+            <%= score.tip %>
+          </div>
+          <div class="col-4">
+            <%= score.point %>
+          </div>
+          <div class="col-4">
+            <%= score.rank %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 
-<h2>スコア作成</h2>
+  <hr>
 
-<%= form_with model: @score_form, url: scores_path, method: :post do |f| %>
-  <table>
-    <thead>
-      <tr>
-        <%= f.fields_for :scores do |i| %>
-          <td><%= f.text_field :point %></td>
+  <div class="row">
+    <% @score_sheet.sheets.each do |sheet| %>
+    <div class="col-3">
+      <div class="row">
+        <div class="col-4">
+          <%= sheet.player.scores.where(score_sheet_id: @score_sheet.id).sum(:tip) %>
+          <%= sheet.player.scores.where(score_sheet_id: @score_sheet.id).sum(:tip) * @score_sheet.rule.tip_point %>
+        </div>
+        <div class="col-4">
+        <%= sheet.player.scores.where(score_sheet_id: @score_sheet.id).sum(:point) %>
+        </div>
+        <div class="col-4">
+        <% if @score_sheet.rule.calculation_status == "subtraction_evenness" %>
+          <%= sheet.player.scores.where(score_sheet_id: @score_sheet.id).size * -(@score_sheet.rule.table_point) %>
+        <% elsif @score_sheet.rule.calculation_status == "subtraction_top" %>
+          <% sheet.player.scores.where(score_sheet_id: @score_sheet.id, rank: 1).size * -(@score_sheet.rule.table_point) %>
+        <% elsif @score_sheet.rule.calculation_status == "subtraction_bottom" %>
+          <% sheet.player.scores.where(score_sheet_id: @score_sheet.id, rank: 4).size * -(@score_sheet.rule.table_point) %>
+        <% else %>
+          <%= 0 %>
         <% end %>
-      </tr>
-    </thead>
-  </table>
-<% end %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+  <hr>
+
+  <hr>
+
+  <div>
+    <%= form_with model: [@score_sheet, @score_form], url: scores_path(id: params[:id]), method: :post do |f| %>
+      <div class="row">
+        <% @score_sheet.sheets.each do |sheet| %>
+          <div class="col-md-3">
+            <%= f.fields_for :scores do |score| %>
+              <%= score.hidden_field :score_sheet_id, value: sheet.score_sheet_id %>
+              <%= score.hidden_field :player_id, value: sheet.player.id %>
+              <div class="row">
+                <div class="col-lg-4">
+                  <%= score.number_field :tip, style: "width: 50px" %>
+                </div>
+                <div class="col-lg-4">
+                  <%= score.text_field :point, style: "width: 50px" %>
+                </div>
+                <div class="col-lg-4">
+                  <%= score.number_field :rank, min: 1, max: 4, value: 1, style: "width: 50px" %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <%= f.submit "追加" %>
+    <% end %>
+  </div>
+
+  <hr>
+
+  <div>
+    <%= form_with model: @score_sheet, url: score_sheets_path(@score_sheet), method: :patch do |f| %>
+      <%= f.label :comment, "コメント" %>
+      <%= f.text_field :comment %>
+      <%= f.submit "追加" %>
+    <% end %>
+</div>

@@ -1,5 +1,5 @@
 class Form::ScoreCollection < Form::Base
-  FORM_COUNT = 4
+  FORM_COUNT = 1
   attr_accessor :scores
 
   def initialize(attributes = {})

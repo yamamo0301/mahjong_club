@@ -25,6 +25,12 @@ class Public::ScoreSheetsController < ApplicationController
     @score_form = Form::ScoreCollection.new
   end
 
+  def update
+    score_sheet = current_user.score_sheets.find(params[:id])
+    score_sheet.update
+    redirect_to score_sheet_path(score_sheet.id)
+  end
+
   def destroy
     score_sheet = current_user.score_sheets.find(params[:id])
     score_sheet.destroy

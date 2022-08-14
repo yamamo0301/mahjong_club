@@ -1,1 +1,61 @@
-<h2>スコアシート詳細</h2>
+<div class="container">
+
+  <h2>スコアシート詳細</h2>
+  <%= @score_sheet.created_at.strftime("%Y-%m-%d") %>
+  <%= @score_sheet.rule.name %>
+  <div class="row">
+    <% @score_sheet.sheets.each do |sheet| %>
+      <div class="d-none d-md-block col-md-3">
+        <%= sheet.player.name %>
+      </div>
+    <% end %>
+  </div>
+  <div class="row">
+    <% @score_sheet.scores.each do |score| %>
+      <div class="d-block d-md-none"><%= score.player.name %></div>
+      <div class="col-md-3">
+        <div class="row">
+          <div class="col-4">
+            <%= score.tip %>
+          </div>
+          <div class="col-4">
+            <%= score.point %>
+          </div>
+          <div class="col-4">
+            <%= score.rank %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <% @score_sheet.sheets.each do |sheet| %>
+    <div class="col-3">
+      <div class="row">
+        <div class="col-4">
+          <%= sheet.player.scores.where(score_sheet_id: @score_sheet.id).sum(:tip) %>
+          <%= sheet.player.scores.where(score_sheet_id: @score_sheet.id).sum(:tip) * @score_sheet.rule.tip_point %>
+        </div>
+        <div class="col-4">
+        <%= sheet.player.scores.where(score_sheet_id: @score_sheet.id).sum(:point) %>
+        </div>
+        <div class="col-4">
+        <% if @score_sheet.rule.calculation_status == "subtraction_evenness" %>
+          <%= sheet.player.scores.where(score_sheet_id: @score_sheet.id).size * -(@score_sheet.rule.table_point) %>
+        <% elsif @score_sheet.rule.calculation_status == "subtraction_top" %>
+          <% sheet.player.scores.where(score_sheet_id: @score_sheet.id, rank: 1).size * -(@score_sheet.rule.table_point) %>
+        <% elsif @score_sheet.rule.calculation_status == "subtraction_bottom" %>
+          <% sheet.player.scores.where(score_sheet_id: @score_sheet.id, rank: 4).size * -(@score_sheet.rule.table_point) %>
+        <% else %>
+          <%= 0 %>
+        <% end %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+</div>
