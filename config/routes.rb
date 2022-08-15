@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :public do
+    get 'relationships/followings'
+    get 'relationships/followers'
+  end
   devise_for :users, skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: "public/sessions"
@@ -17,5 +21,10 @@ Rails.application.routes.draw do
     resources :players,      only: [:index, :create, :edit, :update]
     resources :score_sheets, only: [:new, :index, :show, :create, :edit, :update, :destroy]
     resources :scores,       only: [:create]
+    resources :users do
+      resource :relationships, only: [:index, :create, :destroy]
+      get 'followings' => 'relationships#followings', as: 'followings'
+      get 'followers' => 'relationships#followers', as: 'followers'
+    end
   end
 end
