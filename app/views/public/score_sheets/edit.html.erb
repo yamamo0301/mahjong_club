@@ -92,9 +92,11 @@
   <hr>
 
   <div>
-    <%= form_with model: @score_sheet, url: score_sheets_path(@score_sheet), method: :patch do |f| %>
+    <%= form_with model: @score_sheet, url: score_sheet_path(@score_sheet.id), method: :patch do |f| %>
       <%= f.label :comment, "コメント" %>
       <%= f.text_field :comment %>
       <%= f.submit "追加" %>
     <% end %>
+  </div>
+
 </div>

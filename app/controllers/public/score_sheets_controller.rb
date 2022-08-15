@@ -27,7 +27,7 @@ class Public::ScoreSheetsController < ApplicationController
 
   def update
     score_sheet = current_user.score_sheets.find(params[:id])
-    score_sheet.update
+    score_sheet.update(score_sheet_update_params)
     redirect_to score_sheet_path(score_sheet.id)
   end
 
@@ -44,6 +44,12 @@ class Public::ScoreSheetsController < ApplicationController
     params.require(:form_sheet_collection).permit(
       :rule_id,
       form_sheet_collection_attributes: :player_id)
+  end
+
+  def score_sheet_update_params
+    params.require(:score_sheet).permit(
+      :rule_id,
+      :comment)
   end
 
   def sheet_collection_params
