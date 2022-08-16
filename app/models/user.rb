@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :players, dependent: :destroy
   has_many :score_sheets, dependent: :destroy
   accepts_nested_attributes_for :players
+  has_many :entries, dependent: :destroy
+  has_many :messages, dependent: :destroy
 
   # フォローをした、されたの関係
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
@@ -20,8 +22,8 @@ class User < ApplicationRecord
   # 一覧画面で使う
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :reverse_of_relationships, source: :follower
-  
-  
+
+
   # フォローしたときの処理
   def follow(user_id)
     relationships.create(followed_id: user_id)

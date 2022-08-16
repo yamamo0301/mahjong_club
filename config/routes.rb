@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     resources :players,      only: [:index, :create, :edit, :update]
     resources :score_sheets, only: [:new, :index, :show, :create, :edit, :update, :destroy]
     resources :scores,       only: [:create]
+    resources :messages, only: [:create]
+    resources :rooms, only: [:create, :index, :show]
     resources :users do
       get :search, on: :collection
       resource :relationships, only: [:index, :create, :destroy]
