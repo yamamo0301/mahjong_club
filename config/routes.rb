@@ -22,9 +22,10 @@ Rails.application.routes.draw do
     resources :score_sheets, only: [:new, :index, :show, :create, :edit, :update, :destroy]
     resources :scores,       only: [:create]
     resources :users do
+      get :search, on: :collection
       resource :relationships, only: [:index, :create, :destroy]
       get 'followings' => 'relationships#followings', as: 'followings'
-      get 'followers' => 'relationships#followers', as: 'followers'
+      get 'followers'  => 'relationships#followers',  as: 'followers'
     end
   end
 end
