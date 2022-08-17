@@ -1,12 +1,32 @@
-<% unless @user.id == current_user.id %>
-  <% if @is_room == true %>
-    <%= link_to 'メッセージへ', room_path(@room_id) %>
+<div>
+  <% if @user.id == current_user.id %>
+    <h2>マイページ</h2>
   <% else %>
-    <%= form_with model: @room do |f| %>
-      <%= f.fields_for @entry do |e| %>
-        <% e.hidden_field :user_id, value: @user.id %>
+    <h2>ユーザー詳細ページ</h2>
+  <% end %>
+</div>
+
+<div>
+  <p>プロフィール画像</p>
+  <% if @user.icon.attached? %>
+    <%= image_tag @user.icon, size: "200x200" %>
+  <% else %>
+    <%= image_tag 'no_image', size: "200x200" %>
+  <% end %>
+</div>
+
+
+<div>
+  <% unless @user.id == current_user.id %>
+    <% if @is_room == true %>
+      <%= link_to 'メッセージへ', room_path(@room_id) %>
+    <% else %>
+      <%= form_with model: @room do |f| %>
+        <%= f.fields_for @entry do |e| %>
+          <% e.hidden_field :user_id, value: @user.id %>
+        <% end %>
+      <%= f.submit "メッセージを送る" %>
       <% end %>
-    <%= f.submit "メッセージを送る" %>
     <% end %>
   <% end %>
-<% end %>
+</div>

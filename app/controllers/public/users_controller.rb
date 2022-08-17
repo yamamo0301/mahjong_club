@@ -1,4 +1,8 @@
 class Public::UsersController < ApplicationController
+  def index
+    @users = User.all
+  end
+
   def show
     @user = User.find(params[:id])
     @current_entry = Entry.where(user_id: current_user.id)
@@ -29,4 +33,12 @@ class Public::UsersController < ApplicationController
       @users = User.none
     end
   end
+
+
+  private
+
+  def user_params
+    params.require(:user).permit(:icon)
+  end
+
 end

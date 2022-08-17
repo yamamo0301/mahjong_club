@@ -75,4 +75,7 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   config.hosts << "9c8e844a91b34fd8b101d1bd2968ecf3.vfs.cloud9.ap-northeast-1.amazonaws.com"
+
+  # TODO : ActiveStorageの内部で非同期実行が行われしまう。なので、テスト環境では同期実行を行うようにするため。
+  config.active_job.queue_adapter = :inline
 end

@@ -7,6 +7,9 @@ class User < ApplicationRecord
   # TODO : ハッシュデータをモデルとして定義(都道府県を入力するため)
   extend ActiveHash::Associations::ActiveRecordExtensions
 
+  # TODO : ユーザーにプロフィール画像を持たせるため。
+  has_one_attached :icon
+
   belongs_to :prefecture
   has_many :rules, dependent: :destroy
   has_many :players, dependent: :destroy
