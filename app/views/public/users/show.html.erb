@@ -7,12 +7,42 @@
 </div>
 
 <div>
-  <p>プロフィール画像</p>
-  <% if @user.icon.attached? %>
-    <%= image_tag @user.icon, size: "200x200" %>
-  <% else %>
-    <%= image_tag 'no_image', size: "200x200" %>
-  <% end %>
+  <div>
+    <p>プロフィール画像</p>
+    <% if @user.icon.attached? %>
+      <%= image_tag @user.icon, size: "200x200" %>
+    <% else %>
+      <%= image_tag 'no_image', size: "200x200" %>
+    <% end %>
+  </div>
+  <div>
+    <p>名前</p>
+    <%= @user.name%>
+  </div>
+  <div>
+    <p>拠点</p>
+    <%= @user.prefecture.name %>
+    <%= @user.municipality %>
+  </div>
+  <div>
+    <p>コメント</p>
+    <%= @user.introduction %>
+  </div>
+</div>
+
+<div>
+  <div>
+    <p>総対局数</p>
+    <%= @user.players.find(1).scores.size %>
+  </div>
+  <div>
+    <p>平均順位</p>
+    <%= @user.players.find(1).scores.average(:rank).round(2) %>
+  </div>
+  <div>
+    <p>合計ポイント</p>
+    <%= @user.players.find(1).scores.sum(:point) %>
+  </div>
 </div>
 
 
