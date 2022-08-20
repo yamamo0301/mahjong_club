@@ -5,6 +5,14 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+
+    @my_user = @user.players.find(1).scores.order("id DESC")
+    rank1 = @my_user.where(rank: 1).size
+    rank2 = @my_user.where(rank: 2).size
+    rank3 = @my_user.where(rank: 3).size
+    rank4 = @my_user.where(rank: 4).size
+    @ranks_array = [rank1, rank2, rank3, rank4]
+
     @current_entry = Entry.where(user_id: current_user.id)
     @another_entry = Entry.where(user_id: @user.id)
     # unlessでログインしていないユーザーという条件をつける。

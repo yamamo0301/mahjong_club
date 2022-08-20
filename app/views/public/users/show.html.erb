@@ -30,6 +30,11 @@
   </div>
 </div>
 
+<div style="width:300px; height:300px;">
+  <%= render 'line_graph', user: @my_user %>
+  <%= render 'pie_graph', ranks_array: @ranks_array %>
+</div>
+
 <div>
   <div>
     <p>総対局数</p>
