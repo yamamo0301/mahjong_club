@@ -6,62 +6,77 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-     <header>
-      <a class="logo" href="/">麻雀倶楽部<span> </span></a>
-      <ul class="list">
-        <% if user_signed_in? %>
-          <p class="welcome"><strong>ようこそ、<%= current_user.name %>さん</strong></p>
-          <li>
-            <%= link_to "成績作成", new_score_sheet_path, class: "lists" %>
-          </li>
-          <li>
-            <%= link_to "成績一覧", score_sheets_path, class: "lists" %>
-          </li>
-          <li>
-            <%= link_to "プレイヤー作成", players_path, class: "lists" %>
-          </li>
-          <li>
-            <%= link_to "ルール作成", rules_path, class: "lists" %>
-          </li>
-          <li>
-            <%= link_to "マイページ", user_path(current_user.id), class: "lists" %>
-          </li>
-          <li>
-            <%= link_to "ユーザー一覧", users_path, class: "lists" %>
-          </li>
-          <li>
-            <%= link_to "メッセージ一覧", rooms_path, class: "lists" %>
-          </li>
-          <li>
-            <%= link_to "about", about_path, class: "lists" %>
-          </li>
-          <li>
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "lists" %>
-          </li>
-        <% elsif admin_signed_in? %>
-          <li>
-            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "lists" %>
-          </li>
-        <% else %>
-          <li>
-            <%= link_to "about", about_path, class: "lists" %>
-          </li>
-          <li>
-            <%= link_to "新規登録", new_user_registration_path, class: "lists" %>
-          </li>
-          <li>
-            <%= link_to "ログイン", new_user_session_path, class: "lists" %>
-          </li>
-        <% end %>
-      </ul>
-    </header>
+    <div class="container">
+      <header class="d-flex justify-content-center py-3 border-bottom">
+        <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none" href="/">
+          <p class="fs-2 fw-bold">麻雀倶楽部</p>
+        </a>
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+          <% if user_signed_in? %>
+            <p><strong>ようこそ、<%= current_user.name %>さん</strong></p>
+            <li>
+              <%= link_to "成績作成", new_score_sheet_path, class: "nav-link px-2 link-dark" %>
+            </li>
+            <li>
+              <%= link_to "成績一覧", score_sheets_path, class: "nav-link px-2 link-dark" %>
+            </li>
+            <li>
+              <%= link_to "プレイヤー作成", players_path, class: "nav-link px-2 link-dark" %>
+            </li>
+            <li>
+              <%= link_to "ルール作成", rules_path, class: "nav-link px-2 link-dark" %>
+            </li>
+            <li>
+              <%= link_to "マイページ", user_path(current_user.id), class: "nav-link px-2 link-dark" %>
+            </li>
+            <li>
+              <%= link_to "ユーザー一覧", users_path, class: "nav-link px-2 link-dark" %>
+            </li>
+            <li>
+              <%= link_to "メッセージ一覧", rooms_path, class: "nav-link px-2 link-dark" %>
+            </li>
+            <li>
+              <%= link_to "about", about_path, class: "nav-link px-2 link-dark" %>
+            </li>
+            <li>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link px-2 link-dark" %>
+            </li>
+          <% elsif admin_signed_in? %>
+            <li>
+              <%= link_to "ユーザー一覧", admin_path, class: "nav-link px-2 link-dark" %>
+            </li>
+            <li>
+              <%= link_to "about", about_path, class: "nav-link px-2 link-dark" %>
+            </li>
+            <li>
+              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link px-2 link-dark" %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to "about", about_path, class: "nav-link px-2 link-dark" %>
+            </li>
+            <li>
+              <%= link_to "新規登録", new_user_registration_path, class: "nav-link px-2 link-dark" %>
+            </li>
+            <li>
+              <%= link_to "ログイン", new_user_session_path, class: "nav-link px-2 link-dark" %>
+            </li>
+          <% end %>
+        </ul>
+      </header>
+    </div>
 
-    <%= yield %>
+    <div class="container">
+      <main>
+        <p id="notice" class="text-success"><%= notice %></p>
+        <%= yield %>
+      </main>
+    </div>
+
   </body>
 </html>
