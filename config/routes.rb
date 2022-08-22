@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   devise_for :users, skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: "public/sessions"
@@ -27,13 +27,10 @@ Rails.application.routes.draw do
       get 'followers'  => 'relationships#followers',  as: 'followers'
     end
   end
-  
+
   namespace :admin do
-    resources :orders, only: [:show, :update] do
-      resources :order_details, only: [:update]
+    resources :users, only: [:search] do
+      get :search, on: :collection
     end
-    resources :genres, only: [:index, :create, :edit, :update]
-    resources :items, only: [:index, :new, :create, :show, :edit, :update]
-    resources :customers, only: [:index, :show, :edit, :update]
   end
 end

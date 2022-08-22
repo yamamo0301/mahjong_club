@@ -11,64 +11,66 @@
   </head>
 
   <body>
-    <div class="container">
-      <header class="d-flex justify-content-center py-3 border-bottom">
-        <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none" href="/">
-          <p class="fs-2 fw-bold">麻雀倶楽部</p>
-        </a>
-        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-          <% if user_signed_in? %>
-            <p><strong>ようこそ、<%= current_user.name %>さん</strong></p>
-            <li>
-              <%= link_to "成績作成", new_score_sheet_path, class: "nav-link px-2 link-dark" %>
-            </li>
-            <li>
-              <%= link_to "成績一覧", score_sheets_path, class: "nav-link px-2 link-dark" %>
-            </li>
-            <li>
-              <%= link_to "プレイヤー作成", players_path, class: "nav-link px-2 link-dark" %>
-            </li>
-            <li>
-              <%= link_to "ルール作成", rules_path, class: "nav-link px-2 link-dark" %>
-            </li>
-            <li>
-              <%= link_to "マイページ", user_path(current_user.id), class: "nav-link px-2 link-dark" %>
-            </li>
-            <li>
-              <%= link_to "ユーザー一覧", users_path, class: "nav-link px-2 link-dark" %>
-            </li>
-            <li>
-              <%= link_to "メッセージ一覧", rooms_path, class: "nav-link px-2 link-dark" %>
-            </li>
-            <li>
-              <%= link_to "about", about_path, class: "nav-link px-2 link-dark" %>
-            </li>
-            <li>
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link px-2 link-dark" %>
-            </li>
-          <% elsif admin_signed_in? %>
-            <li>
-              <%= link_to "ユーザー一覧", admin_path, class: "nav-link px-2 link-dark" %>
-            </li>
-            <li>
-              <%= link_to "about", about_path, class: "nav-link px-2 link-dark" %>
-            </li>
-            <li>
-              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link px-2 link-dark" %>
-            </li>
-          <% else %>
-            <li>
-              <%= link_to "about", about_path, class: "nav-link px-2 link-dark" %>
-            </li>
-            <li>
-              <%= link_to "新規登録", new_user_registration_path, class: "nav-link px-2 link-dark" %>
-            </li>
-            <li>
-              <%= link_to "ログイン", new_user_session_path, class: "nav-link px-2 link-dark" %>
-            </li>
-          <% end %>
-        </ul>
-      </header>
+    <div class="bg-success  sticky-top">
+      <div class="container">
+        <header class="d-flex justify-content-center py-3">
+          <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none" href="/">
+            <span class="fs-1 fw-bold text-white">麻雀倶楽部</span>
+          </a>
+          <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <% if user_signed_in? %>
+              <p><strong>ようこそ、<%= current_user.name %>さん</strong></p>
+              <li>
+                <%= link_to "成績作成", new_score_sheet_path, class: "nav-link px-2 text-white" %>
+              </li>
+              <li>
+                <%= link_to "成績一覧", score_sheets_path, class: "nav-link px-2 text-white" %>
+              </li>
+              <li>
+                <%= link_to "プレイヤー作成", players_path, class: "nav-link px-2 text-white" %>
+              </li>
+              <li>
+                <%= link_to "ルール作成", rules_path, class: "nav-link px-2 text-white" %>
+              </li>
+              <li>
+                <%= link_to "マイページ", user_path(current_user.id), class: "nav-link px-2 text-white" %>
+              </li>
+              <li>
+                <%= link_to "ユーザー一覧", users_path, class: "nav-link px-2 text-white" %>
+              </li>
+              <li>
+                <%= link_to "メッセージ一覧", rooms_path, class: "nav-link px-2 text-white" %>
+              </li>
+              <li>
+                <%= link_to "about", about_path, class: "nav-link px-2 text-white" %>
+              </li>
+              <li>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link px-2 text-white" %>
+              </li>
+            <% elsif admin_signed_in? %>
+              <li>
+                <%= link_to "会員一覧", admin_path, class: "nav-link px-2 text-white" %>
+              </li>
+              <li>
+                <%= link_to "about", about_path, class: "nav-link px-2 text-white" %>
+              </li>
+              <li>
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link px-2 text-white" %>
+              </li>
+            <% else %>
+              <li>
+                <%= link_to "about", about_path, class: "nav-link px-2 text-white" %>
+              </li>
+              <li>
+                <%= link_to "新規登録", new_user_registration_path, class: "nav-link px-2 text-white" %>
+              </li>
+              <li>
+                <%= link_to "ログイン", new_user_session_path, class: "nav-link px-2 text-white" %>
+              </li>
+            <% end %>
+          </ul>
+        </header>
+      </div>
     </div>
 
     <div class="container">

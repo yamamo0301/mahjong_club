@@ -1,0 +1,56 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-3">
+      <h2 class="fw-bold">会員一覧</h2>
+    </div>
+    <div class="col-4">
+      <%= form_with url: search_admin_users_path, method: :get, local: true do |f| %>
+        <div class="row">
+          <div class="col-6">
+            <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {include_blank: "---"}, class: "form-select") %>
+          </div>
+          <div class="col-6">
+            <%= f.submit :検索, class: "btn btn-outline-secondary" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>アイコン</th>
+        <th>会員名</th>
+        <th>メールアドレス</th>
+        <th>都道府県</th>
+        <th>ステータス</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.each do |user|%>
+      <tr>
+        <td>
+          <% if user.icon.attached? %>
+            <%= image_tag user.icon, size: "40x40" %>
+          <% else %>
+            <%= image_tag 'no_image', size: "40x40", class: "border border-dark rounded-circle" %>
+          <% end %>
+        </td>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.prefecture.name %></td>
+        <td>
+          <% if user.is_deleted? %>
+            <span class="text-secondary">退会済み</span>
+					<% else %>
+						<span class="text-success">有効</span>
+					<% end %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>

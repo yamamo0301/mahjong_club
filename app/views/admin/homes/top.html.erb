@@ -1,12 +1,1 @@
-<h2>user一覧</h2>
-
-<%= form_with url: search_users_path, method: :get, local: true do |f| %>
-  <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {include_blank: "---"} ) %>
-  <%= f.submit :search %>
-<% end %>
-
-<% @users.each do |user|%>
-  <div>
-    <%= user.name %>
-  </div>
-<% end %>
+<%= render '/admin/users/users_index', users: @users %>
