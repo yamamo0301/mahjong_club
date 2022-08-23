@@ -14,13 +14,16 @@ Rails.application.routes.draw do
   get 'admin' => 'admin/homes#top'
 
   scope module: :public do
+    get 'users/unsubscribe' => 'users#unsubscribe'
+    patch 'users/withdraw' => 'users#withdraw'
+
     resources :rules,        only: [:index, :create, :edit, :update]
     resources :players,      only: [:index, :create, :edit, :update]
     resources :score_sheets, only: [:new, :index, :show, :create, :edit, :update, :destroy]
     resources :scores,       only: [:create]
     resources :messages,     only: [:create]
     resources :rooms,        only: [:create, :index, :show]
-    resources :users,        only: [:index, :show, :edit, :update, :search] do
+    resources :users,        only: [:index, :show, :edit, :update] do
       get :search, on: :collection
       resource :relationships, only: [:index, :create, :destroy]
       get 'followings' => 'relationships#followings', as: 'followings'
@@ -29,7 +32,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :users, only: [:search] do
+    resources :users, only: [] do
       get :search, on: :collection
     end
   end

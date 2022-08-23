@@ -49,6 +49,16 @@ class Public::UsersController < ApplicationController
     redirect_to user_path(@user.id)
   end
 
+  def unsubscribe
+  end
+
+  def withdraw
+    @withdraw = current_user
+    @withdraw.update(is_deleted: true)
+    sign_out(:user)
+    redirect_to root_path
+  end
+
   def search
     if params[:prefecture_id].present?
       @users = User.where(prefecture_id: params[:prefecture_id])
