@@ -6,12 +6,17 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
 
-    @my_user = @user.players.find(1).scores.order("id DESC")
-    rank1 = @my_user.where(rank: 1).size
-    rank2 = @my_user.where(rank: 2).size
-    rank3 = @my_user.where(rank: 3).size
-    rank4 = @my_user.where(rank: 4).size
-    @ranks_array = [rank1, rank2, rank3, rank4]
+    unless @user.players.find_by(name: '自分').scores.empty?
+      @my_user = @user.players.find_by(name: '自分').scores.order("id DESC")
+      rank1 = @my_user.where(rank: 1).size
+      rank2 = @my_user.where(rank: 2).size
+      rank3 = @my_user.where(rank: 3).size
+      rank4 = @my_user.where(rank: 4).size
+      @ranks_array = [rank1, rank2, rank3, rank4]
+      @total_game = @user.players.find_by(name: '自分').scores.size
+      @average_rank = @user.players.find_by(name: '自分').scores.average(:rank).round(2)
+      @total_point = @user.players.find_by(name: '自分').scores.sum(:point)
+    end
 
     @current_entry = Entry.where(user_id: current_user.id)
     @another_entry = Entry.where(user_id: @user.id)
@@ -34,6 +39,16 @@ class Public::UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    @user.update(user_params)
+    redirect_to user_path(@user.id)
+  end
+
   def search
     if params[:prefecture_id].present?
       @users = User.where(prefecture_id: params[:prefecture_id])
@@ -46,7 +61,14 @@ class Public::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:icon)
+    params.require(:user).permit(
+      :icon,
+      :name,
+      :prefecture_id,
+      :municipality,
+      :email,
+      :introduction
+      )
   end
 
 end

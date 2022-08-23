@@ -32,11 +32,7 @@
       <% users.each do |user|%>
       <tr>
         <td>
-          <% if user.icon.attached? %>
-            <%= image_tag user.icon, size: "40x40" %>
-          <% else %>
-            <%= image_tag 'no_image', size: "40x40", class: "border border-dark rounded-circle" %>
-          <% end %>
+          <%= image_tag user.get_icon(40,40), class: "border border-dark rounded-circle" %>
         </td>
         <td><%= user.name %></td>
         <td><%= user.email %></td>

@@ -19,7 +19,9 @@
           </a>
           <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <% if user_signed_in? %>
-              <p><strong>ようこそ、<%= current_user.name %>さん</strong></p>
+              <li>
+                <strong class="nav-link fw-bold text-white">ようこそ、<%= current_user.name %>さん</strong>
+              </li>
               <li>
                 <%= link_to "成績作成", new_score_sheet_path, class: "nav-link px-2 text-white" %>
               </li>
@@ -36,7 +38,7 @@
                 <%= link_to "マイページ", user_path(current_user.id), class: "nav-link px-2 text-white" %>
               </li>
               <li>
-                <%= link_to "ユーザー一覧", users_path, class: "nav-link px-2 text-white" %>
+                <%= link_to "会員一覧", users_path, class: "nav-link px-2 text-white" %>
               </li>
               <li>
                 <%= link_to "メッセージ一覧", rooms_path, class: "nav-link px-2 text-white" %>

@@ -1,4 +1,46 @@
-<h2>プロフィール編集</h2>
+<div class="container">
 
-<h4>画像</h4>
-  <%= f.file_field :icon, accept: "image/*" %>
+  <div class="row">
+    <h2 class="fw-bold">プロフィール編集</h2>
+  </div>
+
+<%= form_with model: @user, url: user_path(@user.id), method: :patch do |f| %>
+  <div class="row">
+    <div class="col-4">
+      <div class="text-center">
+        <%= image_tag @user.get_icon(200,200), class: "border border-dark rounded-circle" %>
+        <div>
+          <span><%= f.label :icon, "プロフィール画像", class: "fw-bold form-label", for: "formFileSm" %></span>
+          <spn><%= f.file_field :icon, accept: "image/*", class: "form-control form-control-sm", id: "formFileSm" %>  </spn>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <p>
+        <span><%= f.label :name, "名前", class: "fw-bold" %></span>
+        <span><%= f.text_field :name, class: "form-control" %></span>
+      </p>
+      <p>
+        <span><%= f.label :prefecture_id, "都道府県", class: "fw-bold" %></span>
+        <span><%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {include_blank: "---"}, class: "form-select" ) %></span>
+      </p>
+      <p>
+        <span><%= f.label :municipality, "市区町村", class: "fw-bold" %></span>
+        <span><%= f.text_field :municipality, class: "form-control" %></span>
+      </p>
+      <p>
+        <span><%= f.label :email, "メールアドレス", class: "fw-bold" %></span>
+        <span><%= f.email_field :email, autocomplete: "email", class: "form-control" %></span>
+      </p>
+      <p>
+        <span><%= f.label :introduction, "コメント", class: "fw-bold" %></span>
+        <span><%= f.text_area :introduction, class: "form-control" %></span>
+      </p>
+      <div class="text-center d-grid gap-2">
+        <%= f.submit :更新, class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+</div>

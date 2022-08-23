@@ -39,4 +39,14 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
+
+  # TODO : Rails内でプロフィール画像を処理させる。
+  def get_icon(width, height)
+    unless icon.attached?
+      file_path = Rails.root.join('app/assets/images/no_image.png')
+      icon.attach(io: File.open(file_path), filename: 'default-icon.png', content_type: 'image/png')
+    end
+    icon.variant(resize_to_fill: [width, height]).processed
+  end
+
 end
