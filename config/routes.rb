@@ -32,8 +32,9 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :users, only: [] do
+    resources :users, only: [:show, :update] do
       get :search, on: :collection
     end
+    resources :rooms, only: [:show]
   end
 end

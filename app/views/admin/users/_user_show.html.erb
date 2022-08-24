@@ -1,0 +1,32 @@
+<div class="text-center">
+  <%= image_tag user.get_icon(200,200), class: "border border-dark rounded-circle" %>
+  <p class="text-center">プロフィール画像</p>
+</div>
+<p class="text-center">
+  <span class="fw-bold">名前</span>
+  <span><%= user.name%></span>
+</p>
+<p class="text-center">
+  <span class="fw-bold">拠点</span>
+  <span>
+    <strong>
+      <%= user.prefecture.name %>
+      <%= user.municipality %>
+    </strong>
+  </span>
+</p>
+<p class="text-center fw-bold">コメント</p>
+<p class="text-center"><%= user.introduction %></p>
+
+<div class="text-center">
+  <%= form_with model: user, url: admin_user_path do |f| %>
+    <p>
+      <span class="fw-bold">会員ステータス</span>
+      <%= f.radio_button :is_deleted, false %>
+      <%= f.label :is_deleted, '有効', value: false %>
+      <%= f.radio_button :is_deleted, true %>
+      <%= f.label :is_deleted, '退会', value: true %>
+    </p>
+    <p><%= f.submit "変更を保存", class: "btn btn-primary" %></p>
+  <% end %>
+</div>

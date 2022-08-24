@@ -1,5 +1,6 @@
 class Public::RoomsController < ApplicationController
   before_action :authenticate_user!
+  
   def create
     # show.html.erbで部屋が存在しなかった場合にformで送られてきたパラメーターが来る。
     # 現在ログインしているユーザーとメッセージ相手のユーザーそれぞれの情報をroom_idで紐付けてEntryテーブルにcreate。

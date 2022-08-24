@@ -1,0 +1,31 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-4">
+      <%= render '/admin/users/user_show', user: @user %>
+    </div>
+    <div class="col-6">
+      <h2  class="fw-bold"><%= "#{@another_entry.user.name}さんとのメッセージ" %></h2>
+      <% @messages.each do |m| %>
+        <% unless m.user_id == @another_entry.user.id %>
+          <div class="speech-bubble">
+            <div class="sb-bubble sb-line3 sb-right">
+              <p><%= m.body %></p>
+            </div>
+          </div>
+        <% else %>
+          <div class="fukidasi">
+            <p>
+              <%= image_tag @another_entry.user.get_icon(60,60), class: "border border-dark rounded-circle" %>
+              <span class="speech-bubble">
+                <span class="sb-bubble sb-line3 sb-left">
+                  <%= m.body %>
+                </span>
+              </span>
+            </p>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

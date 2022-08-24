@@ -6,12 +6,13 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <div class="bg-success  sticky-top">
+    <div class="bg-success bg-gradient sticky-top">
       <div class="container">
         <header class="d-flex justify-content-center py-3">
           <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none" href="/">
@@ -75,7 +76,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <div>
       <main>
         <p id="notice" class="text-success"><%= notice %></p>
         <%= yield %>
