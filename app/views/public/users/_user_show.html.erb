@@ -1,0 +1,19 @@
+<div class="text-center">
+  <%= image_tag user.get_icon(200,200), class: "border border-dark rounded-circle" %>
+  <p class="text-center">プロフィール画像</p>
+</div>
+<p class="text-center">
+  <span>名前</span>
+  <span><strong><%= user.name%></strong></span>
+</p>
+<p class="text-center">
+  <span>拠点</span>
+  <span>
+    <strong>
+      <%= user.prefecture.name %>
+      <%= user.municipality %>
+    </strong>
+  </span>
+</p>
+<p class="text-center">コメント</p>
+<p class="text-center"><%= user.introduction %></p>

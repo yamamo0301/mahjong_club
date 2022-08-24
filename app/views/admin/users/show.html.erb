@@ -25,7 +25,9 @@
                       </p>
                     <% end%>
                     <p>
-                      <span>LastMessage : <%= Message.find_by(id: entry.room.message_ids.last)&.body %></span>
+                      <span>
+                        LastMessage : <%= Message.find_by(id: entry.room.message_ids.last)&.body %>
+                      </span>
                     </p>
                   </object>
                 </div>
