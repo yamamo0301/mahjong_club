@@ -1,29 +1,27 @@
-<h2>プレイヤー一覧</h2>
+<div class="container">
+  <div class="row">
 
-<table>
-  <thead>
-    <tr>
-      <th>プレイヤー名</th>
-      <th></th>
-    </tr>
-  </thead>
-  <% @players.each do |player| %>
-  <tbody>
-    <tr>
-      <td><%= player.name %></td>
-      <td><%= link_to "編集", edit_player_path(player.id) %></td>
-    </tr>
-  </tbody>
-  <% end %>
-</table>
+    <div class="col-3"></div>
 
-<h2>プレイヤー新規作成</h2>
-<%= form_with model: @player, url:players_path, method: :post do |f| %>
-  <table>
-    <tr>
-      <th>プレイヤー名</th>
-      <td><%= f.text_field :name %></td>
-    </tr>
-  </table>
-  <%= f.submit "追加" %>
-<% end %>
+    <div class="col-3">
+      <div>
+        <h2 class="fw-bold">プレイヤー新規作成</h2>
+      </div>
+      <%= form_with model: @player, url:players_path, method: :post do |f| %>
+        <div class="row">
+          <%= f.label :name, "プレイヤー名", class: "fw-bold" %>
+          <div class="col-6">
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control" %>
+          </div>
+          <div class="col-6">
+            <%= f.submit "追加", class: "btn btn-outline-secondary" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-4">
+      <%= render 'players_index', players: @players %>
+    </div>
+  </div>
+</div>

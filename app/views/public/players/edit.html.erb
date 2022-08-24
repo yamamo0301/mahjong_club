@@ -1,31 +1,30 @@
-<h2>プレイヤー一覧</h2>
+<div class="container">
+  <div class="row">
 
-<table>
-  <thead>
-    <tr>
-      <th>プレイヤー名</th>
-      <th></th>
-    </tr>
-  </thead>
-  <% @players.each do |player| %>
-  <tbody>
-    <tr>
-      <td><%= player.name %></td>
-      <td><%= link_to "編集", edit_player_path(player.id) %></td>
-    </tr>
-  </tbody>
-  <% end %>
-</table>
+    <div class="col-3"></div>
 
-<h2><%= link_to "プレイヤー新規作成", players_path %></h2>
+    <div class="col-3">
+      <div>
+        <h2 class="fw-bold">プレイヤー編集</h2>
+      </div>
+      <%= form_with model: @player, url:player_path, method: :patch do |f| %>
+        <div class="row">
+          <%= f.label :name, "プレイヤー名", class: "fw-bold" %>
+          <div class="col-6">
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control" %>
+          </div>
+          <div class="col-6">
+            <%= f.submit "追加", class: "btn btn-outline-secondary" %>
+          </div>
+        </div>
+      <% end %>
+      <div class="row" style="margin-top: 20px;">
+        <%= link_to "新規作成画面へ戻る", players_path, class: "text-center" %>
+      </div>
+    </div>
 
-<h2>プレイヤー編集</h2>
-<%= form_with model: @player, url:player_path, method: :patch do |f| %>
-  <table>
-    <tr>
-      <th>プレーヤー名</th>
-      <td><%= f.text_field :name %></td>
-    </tr>
-    </table>
-  <%= f.submit "更新" %>
-<% end %>
+    <div class="col-4">
+      <%= render 'players_index', players: @players %>
+    </div>
+  </div>
+</div>
