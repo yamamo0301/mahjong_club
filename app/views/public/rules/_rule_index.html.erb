@@ -1,0 +1,26 @@
+<div>
+  <h2 class="fw-bold">ルール一覧</h2>
+</div>
+
+<table class="table">
+  <thead>
+    <tr class="text-center">
+      <th>ルール名</th>
+      <th>チップ<br>ポイント</th>
+      <th>テーブル<br>ポイント</th>
+      <th>テーブルポイント<br>計算方法</th>
+      <th></th>
+    </tr>
+  </thead>
+  <% rules.each do |rule| %>
+  <tbody>
+    <tr class="text-center">
+      <td><%= rule.name %></td>
+      <td><%= rule.tip_point %>P</td>
+      <td><%= rule.table_point %>P</td>
+      <td><%= rule.calculation_status_i18n %></td>
+      <td><%= link_to "編集", edit_rule_path(rule.id) %></td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>

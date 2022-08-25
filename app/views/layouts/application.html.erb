@@ -39,7 +39,7 @@
                 <%= link_to "マイページ", user_path(current_user.id), class: "nav-link px-2 text-white" %>
               </li>
               <li>
-                <%= link_to "会員一覧", users_path, class: "nav-link px-2 text-white" %>
+                <%= link_to "友人一覧", users_path, class: "nav-link px-2 text-white" %>
               </li>
               <li>
                 <%= link_to "メッセージ一覧", rooms_path, class: "nav-link px-2 text-white" %>
@@ -76,12 +76,10 @@
       </div>
     </div>
 
-    <div>
-      <main>
-        <p id="notice" class="text-success text-center"><%= notice %></p>
-        <%= yield %>
-      </main>
-    </div>
+    <main>
+      <p id="notice" class="text-success text-center"><%= notice %></p>
+      <%= yield %>
+    </main>
 
   </body>
 </html>

@@ -1,64 +1,58 @@
-<h2>ルール一覧</h2>
+<div class="container">
+  <div class="row">
 
-<table>
-  <thead>
-    <tr>
-      <th>ルール名</th>
-      <th>チップポイント</th>
-      <th>テーブルポイント</th>
-      <th>テーブルポイント計算方法</th>
-      <th></th>
-    </tr>
-  </thead>
-  <% @rules.each do |rule| %>
-  <tbody>
-    <tr>
-      <td><%= rule.name %></td>
-      <td><%= rule.tip_point %></td>
-      <td><%= rule.table_point %></td>
-      <td><%= rule.calculation_status_i18n %></td>
-      <td><%= link_to "編集", edit_rule_path(rule.id) %></td>
-    </tr>
-  </tbody>
-  <% end %>
-</table>
+    <div class="col-2"></div>
 
-<h2>ルール新規作成</h2>
-<%= form_with model: @rule, url:rules_path, method: :post do |f| %>
-  <table>
-    <tr>
-      <th>ルール名</th>
-      <td><%= f.text_field :name %></td>
-    </tr>
-    <tr>
-      <th>チップポイント</th>
-      <td><%= f.text_field :tip_point %></td>
-    </tr>
-    <tr>
-      <th>テーブルポイント</th>
-      <td><%= f.text_field :table_point %></td>
-    </tr>
-    <tr>
-      <th>テーブルポイント計算方法</th>
-      <td>
-        <p>
-          <%= f.radio_button :calculation_status, Rule.calculation_statuses.key(0) %>
-          <%= f.label :calculation_status, "計算しない" %>
-        </p>
-        <p>
-          <%= f.radio_button :calculation_status, Rule.calculation_statuses.key(1) %>
-          <%= f.label :calculation_status, "平等に引く" %>
-        </p>
-        <p>
-          <%= f.radio_button :calculation_status, Rule.calculation_statuses.key(2) %>
-          <%= f.label :calculation_status, "1位から引く" %>
-        </p>
-        <p>
-          <%= f.radio_button :calculation_status, Rule.calculation_statuses.key(3) %>
-          <%= f.label :calculation_status, "最下位から引く" %>
-        </p>
-      </td>
-    </tr>
-  </table>
-  <%= f.submit "追加" %>
-<% end %>
+    <div class="col-3">
+      <div>
+        <h2 class="fw-bold">ルール新規作成</h2>
+      </div>
+      <%= form_with model: @rule, url:rules_path, method: :post do |f| %>
+        <div class="row">
+          <%= f.label :name, "ルール名", class: "fw-bold" %>
+          <%= f.text_field :name, autofocus: true, class: "form-control" %>
+        </div>
+        <div class="row">
+          <%= f.label :tip_point, "チップポイント", class: "fw-bold" %>
+          <%= f.text_field :tip_point, class: "form-control" %>
+        </div>
+        <div class="row">
+          <%= f.label :table_point, "テーブルポイント", class: "fw-bold" %>
+          <%= f.text_field :table_point, class: "form-control" %>
+        </div>
+        <div class="row">
+          <span class="fw-bold">テーブルポイント計算方法</span>
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+              <div>
+                <%= f.radio_button :calculation_status, Rule.calculation_statuses.key(0) %>
+                <%= f.label :calculation_status, "計算しない" %>
+              </div>
+              <div>
+                <%= f.radio_button :calculation_status, Rule.calculation_statuses.key(1) %>
+                <%= f.label :calculation_status, "平等に引く" %>
+              </div>
+              <div>
+                <%= f.radio_button :calculation_status, Rule.calculation_statuses.key(2) %>
+                <%= f.label :calculation_status, "1位から引く" %>
+              </div>
+              <div>
+                <%= f.radio_button :calculation_status, Rule.calculation_statuses.key(3) %>
+                <%= f.label :calculation_status, "最下位から引く" %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center d-grid gap-2">
+          <%= f.submit "追加", class: "btn btn-outline-secondary" %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-6">
+      <%= render 'rule_index', rules: @rules %>
+    </div>
+
+  </div>
+</div>
