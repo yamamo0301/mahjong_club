@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
 .speech-bubble {
   overflow: hidden;
   padding-bottom: 10px;

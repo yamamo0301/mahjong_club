@@ -1,30 +1,38 @@
-<h2>スコアシート一覧</h2>
+<div class="container">
 
-<table>
-  <thead>
-    <tr>
-      <th>作成日</th>
-      <th>参加者</th>
-      <th>ルール</th>
-      <th>コメント</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <% @score_sheets.each do |score_sheet| %>
-    <tbody>
-      <tr>
-        <td><%= link_to score_sheet.created_at.strftime("%Y-%m-%d"), score_sheet_path(score_sheet.id) %></td>
-        <td>
-          <% score_sheet.sheets.each do |sheet| %>
-            <%= sheet.player.name %>
-          <% end %>
-        </td>
-        <td><%= score_sheet.rule.name %></td>
-        <td><%= score_sheet.comment %></td>
-        <td><%= link_to "編集", edit_score_sheet_path(score_sheet.id) %></td>
-        <td><%= link_to "削除", "/score_sheets/#{score_sheet.id}", method: :delete %></td>
-      </tr>
-    </tbody>
-  <% end %>
-</table>
+  <div class="row text-center">
+    <h2 class="fw-bold">スコアシート一覧</h2>
+  </div>
+
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr class="text-center">
+          <th>作成日</th>
+          <th>参加者</th>
+          <th>ルール</th>
+          <th>コメント</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <% @score_sheets.each do |score_sheet| %>
+        <tbody>
+          <tr class="text-center">
+            <td><%= link_to score_sheet.created_at.strftime("%Y-%m-%d"), score_sheet_path(score_sheet.id), class: "btn btn-outline-success" %></td>
+            <td>
+              <% score_sheet.sheets.each do |sheet| %>
+                <span>・<%= sheet.player.name %></span>
+              <% end %>
+            </td>
+            <td><%= score_sheet.rule.name %></td>
+            <td><%= score_sheet.comment %></td>
+            <td><%= link_to "編集", edit_score_sheet_path(score_sheet.id), class: "btn btn-success" %></td>
+            <td><%= link_to "削除", "/score_sheets/#{score_sheet.id}", method: :delete, class: "btn btn-danger" %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+  </div>
+
+</div>

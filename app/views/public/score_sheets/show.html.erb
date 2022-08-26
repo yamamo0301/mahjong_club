@@ -1,65 +1,181 @@
 <div class="container">
-
-  <h2>スコアシート詳細</h2>
-  <%= @score_sheet.created_at.strftime("%Y-%m-%d") %>
-  <%= @score_sheet.rule.name %>
   <div class="row">
-    <% @score_sheet.sheets.each do |sheet| %>
-      <div class="d-none d-md-block col-md-3">
-        <%= sheet.player.name %>
-      </div>
-    <% end %>
-  </div>
-  <div class="row">
-    <% @score_sheet.scores.each do |score| %>
-      <div class="d-block d-md-none"><%= score.player.name %></div>
-      <div class="col-md-3">
-        <div class="row">
-          <div class="col-4">
-            <%= score.tip %>
-          </div>
-          <div class="col-4">
-            <%= score.point %>
-          </div>
-          <div class="col-4">
-            <%= score.rank %>
-          </div>
-        </div>
-      </div>
-    <% end %>
+    <h2 class="fw-bold">スコアシート詳細</h2>
   </div>
 
-  <hr>
-
   <div class="row">
-    <% @score_sheet.sheets.each do |sheet| %>
-    <div class="col-3">
-      <div class="row">
-        <div class="col-4">
-          <%= sheet.player.scores.where(score_sheet_id: @score_sheet.id).sum(:tip) %>
-          <%= sheet.player.scores.where(score_sheet_id: @score_sheet.id).sum(:tip) * @score_sheet.rule.tip_point %>
-        </div>
-        <div class="col-4">
-        <%= sheet.player.scores.where(score_sheet_id: @score_sheet.id).sum(:point) %>
-        </div>
-        <div class="col-4">
-        <% if @score_sheet.rule.calculation_status == "subtraction_evenness" %>
-          <%= sheet.player.scores.where(score_sheet_id: @score_sheet.id).size * -(@score_sheet.rule.table_point) %>
-        <% elsif @score_sheet.rule.calculation_status == "subtraction_top" %>
-          <% sheet.player.scores.where(score_sheet_id: @score_sheet.id, rank: 1).size * -(@score_sheet.rule.table_point) %>
-        <% elsif @score_sheet.rule.calculation_status == "subtraction_bottom" %>
-          <% sheet.player.scores.where(score_sheet_id: @score_sheet.id, rank: 4).size * -(@score_sheet.rule.table_point) %>
-        <% else %>
-          <%= 0 %>
-        <% end %>
-        </div>
-      </div>
+    <div class="col-1"></div>
+    <div class="col-2">
+      <h4><%= @score_sheet.created_at.strftime("%Y-%m-%d") %>作成</h4>
     </div>
-    <% end %>
+    <div class="col-3">
+      <h4>適応ルール「<%= @score_sheet.rule.name %>」</h4>
+    </div>
   </div>
 
-  <div>
-    <%= @score_sheet.comment %>
-  </div>
+
+<div class="row">
+
+<table class="table table-bordered">
+	<tbody>
+		<tr class="text-center table-success">
+			<td></td>
+			<% @score_sheet.sheets.each do |sheet| %>
+			  <th colspan="3"><%= sheet.player.name %></th>
+			<% end %>
+		</tr>
+
+		<tr>
+			<th></th>
+      <th colspan="3">
+        <table class="table table-bordered table table-striped">
+          <tbody>
+            <tr>
+              <th></th>
+              <th>順位</th>
+              <th>チップ</th>
+              <th>ポイント</th>
+            </tr>
+            <% count = 0 %>
+            <% @score_sheet.scores.where(player_id: @player1).each do |score| %>
+              <tr>
+                <% count += 1 %>
+                <td><%= count %>回戦</td>
+                <td>
+                  <% if score.rank == 1 %>
+                    <%= score.rank %>位<i class="bi bi-trophy-fill text-warning"></i>
+                  <% elsif score.rank == 4 %>
+                    <%= score.rank %>位<i class="bi bi-emoji-dizzy-fill text-danger"></i>
+                  <% else %>
+                    <%= score.rank %>位
+                  <% end %>
+                </td>
+                <td>
+                  <% if score.tip < 0 %>
+                    <span class="text-danger"><%= score.tip %>P</span>
+                  <% else %>
+                    <span><%= score.tip %>P</span>
+                  <% end %>
+                </td>
+                <td>
+                  <% if score.point < 0 %>
+                    <span class="text-danger"><%= score.point %>P</span>
+                  <% else %>
+                    <span><%= score.point %>P</span>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </th>
+
+      <th colspan="3">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th></th>
+            <th>順位</th>
+            <th>チップ</th>
+            <th>ポイント</th>
+          </tr>
+          <% count = 0 %>
+          <% @score_sheet.scores.where(player_id: @player2).each do |score| %>
+            <tr>
+              <% count += 1 %>
+              <td><%= count %>回戦</td>
+              <td><%= score.rank %>位</td>
+              <td>
+                <% if score.tip < 0 %>
+                  <span class="text-danger"><%= score.tip %>P</span>
+                <% else %>
+                  <span><%= score.tip %>P</span>
+                <% end %>
+              </td>
+              <td>
+                <% if score.point < 0 %>
+                  <span class="text-danger"><%= score.point %>P</span>
+                <% else %>
+                  <span><%= score.point %>P</span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      </th>
+
+      <th colspan="3">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th></th>
+            <th>順位</th>
+            <th>チップ</th>
+            <th>ポイント</th>
+          </tr>
+          <% count = 0 %>
+          <% @score_sheet.scores.where(player_id: @player3).each do |score| %>
+          <tr>
+            <% count += 1 %>
+            <td><%= count %>回戦</td>
+            <td><%= score.rank %>位</td>
+            <td>
+              <% if score.tip < 0 %>
+                <span class="text-danger"><%= score.tip %>P</span>
+              <% else %>
+                <span><%= score.tip %>P</span>
+              <% end %>
+            </td>
+            <td>
+              <% if score.point < 0 %>
+                <span class="text-danger"><%= score.point %>P</span>
+              <% else %>
+                <span><%= score.point %>P</span>
+              <% end %>
+      			</td>
+      		</tr>
+      		<% end %>
+      	</tbody>
+      </table>
+      </th>
+
+      <th colspan="3">
+      <table class="table table-bordered">
+      	<tbody>
+      		<tr>
+      		  <th></th>
+      			<th>順位</th>
+      			<th>チップ</th>
+      			<th>ポイント</th>
+      		</tr>
+      		<% count = 0 %>
+      		<% @score_sheet.scores.where(player_id: @player4).each do |score| %>
+      		<tr>
+      		  <% count += 1 %>
+      		  <td><%= count %>回戦</td>
+      			<td><%= score.rank %>位</td>
+      			<td>
+      			  <% if score.tip < 0 %>
+                <span class="text-danger"><%= score.tip %>P</span>
+              <% else %>
+                <span><%= score.tip %>P</span>
+              <% end %>
+      			</td>
+      			<td>
+              <% if score.point < 0 %>
+                <span class="text-danger"><%= score.point %>P</span>
+              <% else %>
+                <span><%= score.point %>P</span>
+              <% end %>
+            </td>
+      		</tr>
+      		<% end %>
+      	</tbody>
+      </table>
+      </th>
+		</tr>
+	</tbody>
+</table>
 
 </div>

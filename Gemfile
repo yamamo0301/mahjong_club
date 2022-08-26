@@ -64,3 +64,5 @@ gem "enum_help"
 gem 'pry-rails'
 
 gem 'devise-i18n'
+
+gem "font-awesome-sass", "~> 6.1.2"

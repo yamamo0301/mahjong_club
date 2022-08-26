@@ -5,11 +5,15 @@ class Public::ScoreSheetsController < ApplicationController
   end
 
   def index
-    @score_sheets = current_user.score_sheets.all
+    @score_sheets = current_user.score_sheets.order("id DESC")
   end
 
   def show
     @score_sheet = current_user.score_sheets.find(params[:id])
+    @player1 = @score_sheet.sheets.take(1).map(&:player_id)
+    @player2 = @score_sheet.sheets.take(2).drop(1).map(&:player_id)
+    @player3 = @score_sheet.sheets.take(3).drop(2).map(&:player_id)
+    @player4 = @score_sheet.sheets.drop(3).map(&:player_id)
   end
 
   def create

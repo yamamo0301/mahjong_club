@@ -11,9 +11,9 @@ import "channels"
 // ここから追加
 import "jquery";
 import "popper.js";
-import '@fortawesome/fontawesome-free/js/all'
 import "bootstrap";
 import "../stylesheets/application.scss";
+import '@fortawesome/fontawesome-free/js/all';
 // こまで追加
 
 Rails.start()
