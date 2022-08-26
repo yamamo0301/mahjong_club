@@ -1,7 +1,4 @@
 class Public::RelationshipsController < ApplicationController
-  def index
-    @users = User.all
-  end
    # フォローするとき
   def create
     current_user.follow(params[:user_id])

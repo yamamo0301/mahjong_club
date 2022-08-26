@@ -1,0 +1,61 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-3">
+      <h2 class="fw-bold">会員一覧</h2>
+    </div>
+    <div class="col-4">
+      <%= form_with url: search_users_path, method: :get, local: true do |f| %>
+        <div class="row">
+          <div class="col-6">
+              <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {include_blank: "---"}, class: "form-select") %>
+          </div>
+          <div class="col-2">
+            <%= f.submit :検索, class: "btn btn-outline-secondary" %>
+          </div>
+          <div class="col-4">
+            <%= link_to "会員一覧へ戻る", users_path %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>アイコン</th>
+        <th>会員名</th>
+        <th>都道府県</th>
+        <th>ステータス</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.each do |user|%>
+      <tr>
+        <td>
+          <%= image_tag user.get_icon(40,40), class: "border border-dark rounded-circle" %>
+        </td>
+        <td>
+          <%= link_to admin_user_path(user.id) do %>
+            <%= user.name %>
+          <% end %>
+        </td>
+        <td><%= user.prefecture.name %></td>
+        <td>
+          <div>
+            <% unless user == current_user %>
+              <% if current_user.following?(user) %>
+                <%= link_to "フォローを外す", user_relationships_path(user.id), method: :delete, class: "btn btn-warning" %>
+              <% else %>
+                <%= link_to "フォローする", user_relationships_path(user.id), method: :post, class: "btn btn-primary" %>
+              <% end %>
+            <% end %>
+          </div>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>
