@@ -1,0 +1,40 @@
+<table class="table table-bordered table table-striped">
+  <tbody>
+    <tr>
+      <th></th>
+      <th>順位</th>
+      <th>チップ</th>
+      <th>ポイント</th>
+    </tr>
+    <% count = 0 %>
+    <% score_sheet.scores.where(player_id: player).each do |score| %>
+      <tr>
+        <% count += 1 %>
+        <td><%= count %>回戦</td>
+        <td>
+          <% if score.rank == 1 %>
+            <%= score.rank %>位<i class="bi bi-trophy-fill text-warning"></i>
+          <% elsif score.rank == 4 %>
+            <%= score.rank %>位<i class="bi bi-emoji-dizzy-fill text-danger"></i>
+          <% else %>
+            <%= score.rank %>位
+          <% end %>
+        </td>
+        <td>
+          <% if score.tip < 0 %>
+            <span class="text-danger"><%= score.tip %>P</span>
+          <% else %>
+            <span><%= score.tip %>P</span>
+          <% end %>
+        </td>
+        <td>
+          <% if score.point < 0 %>
+            <span class="text-danger"><%= score.point %>P</span>
+          <% else %>
+            <span><%= score.point %>P</span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
