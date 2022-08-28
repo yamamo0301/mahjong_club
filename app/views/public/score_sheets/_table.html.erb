@@ -1,6 +1,6 @@
 <table class="table table-bordered table table-striped">
   <tbody>
-    <tr>
+    <tr class="table-info text-center">
       <th></th>
       <th>順位</th>
       <th>チップ</th>
@@ -8,14 +8,14 @@
     </tr>
     <% count = 0 %>
     <% score_sheet.scores.where(player_id: player).each do |score| %>
-      <tr>
+      <tr class="text-end">
         <% count += 1 %>
         <td><%= count %>回戦</td>
         <td>
           <% if score.rank == 1 %>
-            <%= score.rank %>位<i class="bi bi-trophy-fill text-warning"></i>
+            <i class="bi bi-trophy-fill text-warning"></i><%= score.rank %>位
           <% elsif score.rank == 4 %>
-            <%= score.rank %>位<i class="bi bi-emoji-dizzy-fill text-danger"></i>
+            <i class="bi bi-emoji-dizzy-fill text-danger"></i><%= score.rank %>位
           <% else %>
             <%= score.rank %>位
           <% end %>
@@ -37,4 +37,41 @@
       </tr>
     <% end %>
   </tbody>
+  <tfoot>
+    <tr class="table-warning text-end">
+      <td>小計</td>
+      <td></td>
+      <td>
+        <% if score_sheet.scores.where(player_id: player).sum(:tip) < 0 %>
+          <span class="text-danger">
+        <% else %>
+          <span>
+        <% end %>
+          <%= score_sheet.scores.where(player_id: player).sum(:tip) %>P
+        </span>
+      </td>
+      <td>
+        <% if score_sheet.scores.where(player_id: player).sum(:point) < 0 %>
+          <span class="text-danger">
+        <% else %>
+          <span>
+        <% end %>
+          <%= score_sheet.scores.where(player_id: player).sum(:point) %>P
+        </span>
+      </td>
+    </tr>
+    <tr class="table-danger text-end">
+      <th>合計</th>
+      <th>
+        <%= score_sheet.table_point_calculation(player) %>
+      </th>
+      <th colspan="2">
+        <% if score_sheet.total_point(player) < 0 %>
+          <span class="text-danger"><%= score_sheet.total_point(player) %>P</span>
+        <% else %>
+          <span><%= score_sheet.total_point(player) %>P</span>
+        <% end %>
+      </th>
+    </tr>
+  </tfoot>
 </table>
