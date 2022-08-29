@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     resources :rules,        only: [:index, :create, :edit, :update]
     resources :players,      only: [:index, :create, :edit, :update]
     resources :score_sheets, only: [:new, :index, :show, :create, :edit, :update, :destroy]
-    resources :scores,       only: [:create]
+    resources :scores,       only: [:create, :update]
     resources :messages,     only: [:create]
     resources :rooms,        only: [:create, :index, :show]
     resources :users,        only: [:index, :show, :edit, :update] do

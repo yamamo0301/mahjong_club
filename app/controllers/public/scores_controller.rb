@@ -5,6 +5,12 @@ class Public::ScoresController < ApplicationController
     redirect_to edit_score_sheet_path(params[:id])
   end
 
+  def update
+    score = Score.find(params[:id])
+    score.update(score_params)
+    redirect_to edit_score_sheet_path(params[:score][:score_sheet_id])
+  end
+
 
   private
 
@@ -12,5 +18,12 @@ class Public::ScoresController < ApplicationController
     params
       .require(:form_score_collection)
       .permit(scores_attributes: [:score_sheet_id, :player_id, :tip, :point, :rank] )
+  end
+
+  def score_params
+    params.require(:score).permit(
+      :rank,
+      :tip,
+      :point)
   end
 end

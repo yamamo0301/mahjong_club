@@ -27,6 +27,10 @@ class Public::ScoreSheetsController < ApplicationController
   def edit
     @score_sheet = current_user.score_sheets.find(params[:id])
     @score_form = Form::ScoreCollection.new
+    @player1 = @score_sheet.sheets.take(1).map(&:player_id)
+    @player2 = @score_sheet.sheets.take(2).drop(1).map(&:player_id)
+    @player3 = @score_sheet.sheets.take(3).drop(2).map(&:player_id)
+    @player4 = @score_sheet.sheets.drop(3).map(&:player_id)
   end
 
   def update

@@ -10,7 +10,7 @@
     <% score_sheet.scores.where(player_id: player).each do |score| %>
       <tr class="text-end">
         <% count += 1 %>
-        <td><%= count %>回戦</td>
+        <td><%= count %></td>
         <td>
           <% if score.rank == 1 %>
             <i class="bi bi-trophy-fill text-warning"></i><%= score.rank %>位

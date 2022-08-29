@@ -1,0 +1,85 @@
+
+<table class="table table-bordered table table-striped">
+  <tbody>
+    <tr class="table-info text-center" style="font-size: 12px;">
+      <th></th>
+      <th>順位</th>
+      <th>チップ</th>
+      <th>ポイント</th>
+      <th>更新</th>
+    </tr>
+    <% count = 0 %>
+
+      <% score_sheet.scores.where(player_id: player).each do |score| %>
+        <%= form_with model: score, url: score_path(score.id), method: :patch do |f| %>
+        <tr class="text-end">
+          <%= f.hidden_field :score_sheet_id, :value => score.score_sheet.id %>
+          <% count += 1 %>
+          <td><%= count %></td>
+          <td>
+            <div>
+              <%= f.number_field :rank, min: 1, max: 4, style: "width: 40px", class: "text-end form-control form-control-sm" %>
+              <span style="font-size: 12px;">位</span>
+            </div>
+          </td>
+          <td>
+            <div>
+              <%= f.number_field :tip, style: "width: 60px", class: "text-end form-control form-control-sm" %>
+              <span style="font-size: 12px;">P</span>
+            </div>
+          </td>
+          <td>
+            <div>
+              <%= f.number_field :point, style: "width: 60px", class: "text-end form-control form-control-sm" %>
+              <span style="font-size: 12px;">P</span>
+            </div>
+          </td>
+          <td>
+            <%= button_tag(type: "submit", class: "btn btn-success btn-sm") do %>
+              <i class="bi bi-arrow-clockwise"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr class="table-warning text-end">
+      <td style="writing-mode: vertical-rl;">小計</td>
+      <td></td>
+      <td>
+        <% if score_sheet.scores.where(player_id: player).sum(:tip) < 0 %>
+          <span class="text-danger">
+        <% else %>
+          <span>
+        <% end %>
+          <%= score_sheet.scores.where(player_id: player).sum(:tip) %>P
+        </span>
+      </td>
+      <td>
+        <% if score_sheet.scores.where(player_id: player).sum(:point) < 0 %>
+          <span class="text-danger">
+        <% else %>
+          <span>
+        <% end %>
+          <%= score_sheet.scores.where(player_id: player).sum(:point) %>P
+        </span>
+      </td>
+      <td></td>
+    </tr>
+    <tr class="table-danger text-end">
+      <th style="writing-mode: vertical-rl;">合計</th>
+      <th colspan="2">
+        <%= score_sheet.table_point_calculation(player) %>
+      </th>
+      <th>
+        <% if score_sheet.total_point(player) < 0 %>
+          <span class="text-danger"><%= score_sheet.total_point(player) %>P</span>
+        <% else %>
+          <span><%= score_sheet.total_point(player) %>P</span>
+        <% end %>
+      </th>
+      <th></th>
+    </tr>
+  </tfoot>
+</table>

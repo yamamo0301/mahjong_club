@@ -1,13 +1,30 @@
-<h2>スコアシート作成</h2>
+<div class="container">
+  <div class="row text-center">
+    <h2 class="fw-bold">スコアシート作成</h2>
+  </div>
 
-<%= form_with model: [@score_sheet, @sheet_form], url: score_sheets_path, method: :post do |f| %>
-  <h3>メンバー選択</h3>
+  <%= form_with model: [@score_sheet, @sheet_form], url: score_sheets_path, method: :post do |f| %>
+  <div class="row text-center" style="margin-top: 20px;">
+    <h3>メンバー選択</h3>
+    <div class="col-2"></div>
     <%= f.fields_for :sheets do |i| %>
-      <%= i.select :player_id, options_from_collection_for_select(current_user.players.all, :id, :name), {prompt: '選択してください'}, {class: ""} %>
+      <div class="col-2">
+        <%= i.select :player_id, options_from_collection_for_select(current_user.players.all, :id, :name), {prompt: '選択してください'}, {class: "form-select"} %>
+      </div>
     <% end %>
-
-  <h3>ルール選択</h3>
-    <%= f.select :rule_id, options_from_collection_for_select(current_user.rules.all, :id, :name), {prompt: '選択してください'}, {class: ""}%>
-
-  <%= f.submit "作成" %>
-<% end %>
+  </div>
+  <div class="row text-center" style="margin-top: 20px;">
+    <h3>ルール選択</h3>
+    <div class="col-5"></div>
+    <div class="col-2">
+      <%= f.select :rule_id, options_from_collection_for_select(current_user.rules.all, :id, :name), {prompt: '選択してください'}, {class: "form-select"}%>
+    </div>
+  </div>
+  <div class="row text-center" style="margin-top: 20px;">
+    <div class="col-4"></div>
+    <div class="col-4 text-center d-grid gap-2">
+      <%= f.submit "作成", class: "btn btn-outline-secondary" %>
+    </div>
+  </div>
+  <% end %>
+</div>
