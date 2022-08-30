@@ -1,15 +1,25 @@
 <div class="container">
 
   <div class="row">
+    <h2 class="fw-bold">メッセージ履歴</h2>
+  </div>
+
+  <div class="row">
     <div class="col-4">
-      <%= render '/admin/users/user_show', user: @user %>
-      <div class="text-center">
-        <%= link_to "詳細ページに戻る", admin_user_path(@user.id) %>
+      <div class="card bg-transparent p-3">
+        <%= render '/admin/users/user_show', user: @user %>
+        <div class="text-center p-3">
+          <%= link_to admin_user_path(@user.id) do %>
+            <i class="bi bi-arrow-left-circle"></i>
+            <span>詳細ページに戻る</span>
+          <% end %>
+        </div>
       </div>
     </div>
 
     <div class="col-6">
       <h2 class="fw-bold"><%= "#{@another_entry.user.name}さんとのメッセージ" %></h2>
+      <div class="card bg-white p-3">
       <% @messages.each do |m| %>
         <% unless m.user_id == @another_entry.user.id %>
           <div class="speech-bubble">
@@ -20,7 +30,7 @@
         <% else %>
           <div class="fukidasi">
             <p>
-              <%= image_tag @another_entry.user.get_icon(60,60), class: "border border-dark rounded-circle" %>
+              <%= image_tag @another_entry.user.get_icon(30,30), class: "border border-dark rounded-circle sb-left" %>
               <span class="speech-bubble">
                 <span class="sb-bubble sb-line3 sb-left">
                   <%= m.body %>
@@ -30,6 +40,8 @@
           </div>
         <% end %>
       <% end %>
+      </div>
     </div>
   </div>
+
 </div>

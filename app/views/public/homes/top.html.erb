@@ -1,20 +1,19 @@
 <div class="container">
 
   <div class="row">
-    <div class="text-center">
-      <h1 class="fw-bold">ようこそ麻雀倶楽部へ！</h1>
-      <p>このサイトは麻雀の成績を保存したり、</p>
-      <p>自分の近くに麻雀が好きな人がいないか探してみたり、</p>
-      <p>もしいた場合はメッセージを送ってみたり、</p>
-      <p>そんな事が出来るサイトです！</p>
-      <p>よろしければ会員登録をして利用してみてください！！</p>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="text-center">
-      <%= link_to "新規登録", new_user_registration_path, class: "btn btn-primary" %>
-      <%= link_to "ログイン", new_user_session_path, class: "btn btn-success" %>
+    <div class="d-flex align-items-center justify-content-center" style="height: 500px;">
+      <div class="text-center fw-bold">
+        <h1 class="fw-bold p-3">ようこそ麻雀倶楽部へ！</h1>
+        <p>このサイトは麻雀の成績を保存したり、</p>
+        <p>自分の近くに麻雀が好きな人がいないか探してみたり、</p>
+        <p>もしいた場合はメッセージを送ってみたり、</p>
+        <p>そんな事が出来るサイトです！</p>
+        <p>よろしければ会員登録をして利用してみてください！！</p>
+        <div class="p-3">
+          <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-primary" %>
+          <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-primary" %>
+        </div>
+      </div>
     </div>
   </div>
 

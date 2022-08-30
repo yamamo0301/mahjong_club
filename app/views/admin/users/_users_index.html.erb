@@ -8,7 +8,7 @@
       <%= form_with url: search_admin_users_path, method: :get, local: true do |f| %>
         <div class="row">
           <div class="col-6">
-              <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {include_blank: "---"}, class: "form-select") %>
+              <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {include_blank: "選択してください"}, class: "form-select") %>
           </div>
           <div class="col-6">
             <%= f.submit :検索, class: "btn btn-outline-secondary" %>
@@ -18,7 +18,7 @@
     </div>
   </div>
 
-  <table class="table">
+  <table class="table text-center">
     <thead>
       <tr>
         <th>アイコン</th>

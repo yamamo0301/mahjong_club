@@ -1,19 +1,22 @@
-<div class="text-center">
-  <%= image_tag user.get_icon(200,200), class: "border border-dark rounded-circle" %>
-  <p class="text-center">プロフィール画像</p>
+<div class="text-center fw-bold">
+  <div class="p-3">
+    <%= image_tag user.get_icon(200,200), class: "border border-dark rounded-circle" %>
+  </div>
+  <p>
+    <span>名前：</span>
+    <span><%= user.name%></span>
+  </p>
+  <p>
+    <span>拠点：</span>
+    <span>
+      <strong>
+        <%= user.prefecture.name %>
+        <%= user.municipality %>
+      </strong>
+    </span>
+  </p>
+  <div class="card bg-transparent p-3">
+    <p class="text-start">コメント：</p>
+    <p><%= user.introduction %></p>
+  </div>
 </div>
-<p class="text-center">
-  <span class="fw-bold">名前</span>
-  <span><%= user.name%></span>
-</p>
-<p class="text-center">
-  <span class="fw-bold">拠点</span>
-  <span>
-    <strong>
-      <%= user.prefecture.name %>
-      <%= user.municipality %>
-    </strong>
-  </span>
-</p>
-<p class="text-center fw-bold">コメント</p>
-<p class="text-center"><%= user.introduction %></p>

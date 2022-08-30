@@ -6,41 +6,47 @@
 
   <div class="row">
     <div class="col-4">
-      <%= render 'user_show', user: @user %>
-      <div class="text-center">
-        <%= form_with model: @user, url: admin_user_path do |f| %>
-          <p>
-            <span class="fw-bold">会員ステータス</span>
-            <%= f.radio_button :is_deleted, false %>
-            <%= f.label :is_deleted, '有効', value: false %>
-            <%= f.radio_button :is_deleted, true %>
-            <%= f.label :is_deleted, '退会', value: true %>
-          </p>
-          <p><%= f.submit "変更を保存", class: "btn btn-primary" %></p>
-        <% end %>
+      <div class="card bg-transparent p-3">
+        <%= render 'user_show', user: @user %>
+        <div class="text-center fw-bold" style="margin-top: 10px;">
+          <%= form_with model: @user, url: admin_user_path do |f| %>
+            <p>
+              <span>会員ステータス：</span>
+              <%= f.radio_button :is_deleted, false %>
+              <%= f.label :is_deleted, '有効', value: false %>
+              <%= f.radio_button :is_deleted, true %>
+              <%= f.label :is_deleted, '退会', value: true %>
+            </p>
+            <p><%= f.submit "変更を保存", class: "btn btn-outline-primary" %></p>
+          <% end %>
+        </div>
       </div>
     </div>
 
     <div class="col-3">
-      <h3>メッセージ履歴一覧</h3>
+      <h3 class="fw-bold">メッセージ履歴一覧</h3>
       <% @another_entries.each do |entry| %>
         <%= link_to admin_room_path(id: entry.room.id, user_id: @user.id) do %>
-          <div class="card bg-light bg-gradient">
+          <div class="card bg-transparent">
             <div class="card-body">
-              <div class="d-flex">
+              <div>
                 <div class="chat-avatar">
                   <object>
                     <%= link_to admin_user_path(entry.user) do %>
                       <p>
-                        <%= image_tag entry.user.get_icon(40,40), class: "border border-dark rounded-circle" %>
+                        <%= image_tag entry.user.get_icon(70,70), class: "border border-dark rounded-circle" %>
                         <span><%= entry.user.name %></span>
                       </p>
                     <% end%>
-                    <p>
-                      <span>
-                        LastMessage : <%= Message.find_by(id: entry.room.message_ids.last)&.body %>
-                      </span>
-                    </p>
+                    <div class="card bg-transparent p-3">
+                      <p>
+                        <span>
+                          <i class="bi bi-envelope"></i>
+                          <%= Message.find_by(id: entry.room.message_ids.last)&.body %>
+                        </span>
+                      </p>
+                      <p class="text-end">メッセージ履歴へ<i class="bi bi-arrow-right-circle"></i></p>
+                    </div>
                   </object>
                 </div>
               </div>
