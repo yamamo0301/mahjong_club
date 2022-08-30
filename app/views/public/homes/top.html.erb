@@ -1,4 +1,5 @@
 <div class="container">
+
   <div class="row">
     <div class="text-center">
       <h1 class="fw-bold">ようこそ麻雀倶楽部へ！</h1>
@@ -9,4 +10,12 @@
       <p>よろしければ会員登録をして利用してみてください！！</p>
     </div>
   </div>
+
+  <div class="row">
+    <div class="text-center">
+      <%= link_to "新規登録", new_user_registration_path, class: "btn btn-primary" %>
+      <%= link_to "ログイン", new_user_session_path, class: "btn btn-success" %>
+    </div>
+  </div>
+
 </div>
