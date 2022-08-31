@@ -16,6 +16,10 @@ class Public::UsersController < ApplicationController
       @total_game = @user.players.find_by(name: '自分').scores.size
       @average_rank = @user.players.find_by(name: '自分').scores.average(:rank).round(2)
       @total_point = @user.players.find_by(name: '自分').scores.sum(:point)
+      @rank1_rate = rank1 * 100 / @my_user.size.to_f
+      @rank2_rate = rank2 * 100 / @my_user.size.to_f
+      @rank3_rate = rank3 * 100 / @my_user.size.to_f
+      @rank4_rate = rank4 * 100 / @my_user.size.to_f
     end
 
     @current_entry = Entry.where(user_id: current_user.id)

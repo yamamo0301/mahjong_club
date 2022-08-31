@@ -39,31 +39,60 @@
         <p class="fw-bold text-danger">※保存されたスコアが存在しないため表示出来ません。</p>
       </div>
     <% else %>
-      <!--<div class="col-4">-->
-        <div style="width:300px; height:240px;">
-          <p>過去10戦順位</p>
-          <%= render 'line_graph', user: @my_user %>
-        </div>
-        <div style="width:300px; height:300px;">
-          <p>順位比率</p>
-          <%= render 'pie_graph', ranks_array: @ranks_array %>
-        </div>
-      <!--</div>-->
-
-      <div class="col-4">
-        <div>
-          <p>
-            <span>総対局数</span>
-            <span><strong><%= @total_game %>戦</strong></span>
-          </p>
-          <p>
-            <span>平均順位</span>
-            <span><strong><%= @average_rank %>位</strong></span>
-          </p>
-          <p>
-            <span>合計ポイント</span>
-            <span><strong><%= @total_point %>P</strong></span>
-          </p>
+      <div class="col-8">
+        <div class="card bg-transparent p-3">
+          <div class="row">
+            <div class="col-6">
+              <h4 class="text-center fw-bold">直近10戦の順位</h4>
+              <%= render 'line_graph', user: @my_user %>
+              <div style="margin-top: 30px;">
+                <table class="table table-bordered text-center border-secondary">
+                  <tbody>
+                    <tr>
+                      <th>総対局数</th>
+                      <td><%= @total_game %>戦</td>
+                    </tr>
+                    <tr>
+                      <th>平均順位</th>
+                      <td><%= @average_rank %>位</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">
+                        <table class="table table-bordered text-center border-secondary">
+                          <tbody>
+                            <tr>
+                              <th>１位率</th>
+                              <td><%= @rank1_rate.round(2) %>%</td>
+                            </tr>
+                            <tr>
+                              <th>２位率</th>
+                              <td><%= @rank2_rate.round(2) %>%</td>
+                            </tr>
+                            <tr>
+                              <th>３位率</th>
+                              <td><%= @rank3_rate.round(2) %>%</td>
+                            </tr>
+                            <tr>
+                              <th>４位率</th>
+                              <td><%= @rank4_rate.round(2) %>%</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>合計ポイント</th>
+                      <td><%= @total_point %>P</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-6">
+              <h4 class="text-center fw-bold">順位比率<h4>
+              <%= render 'pie_graph', ranks_array: @ranks_array %>
+            </div>
+          </div>
         </div>
       </div>
     <% end %>
