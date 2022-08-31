@@ -19,7 +19,7 @@
       <% @score_sheets.each do |score_sheet| %>
         <tbody>
           <tr class="text-center">
-            <td><%= link_to score_sheet.created_at.strftime("%Y-%m-%d"), score_sheet_path(score_sheet.id), class: "btn btn-outline-success" %></td>
+            <td><%= link_to score_sheet.created_at.strftime("%Y-%m-%d"), score_sheet_path(score_sheet.id), class: "btn btn-outline-success btn-sm" %></td>
             <td>
               <% score_sheet.sheets.each do |sheet| %>
                 <span>・<%= sheet.player.name %></span>
@@ -27,8 +27,8 @@
             </td>
             <td><%= score_sheet.rule.name %></td>
             <td><%= score_sheet.comment %></td>
-            <td><%= link_to "編集", edit_score_sheet_path(score_sheet.id), class: "btn btn-outline-success" %></td>
-            <td><%= link_to "削除", "/score_sheets/#{score_sheet.id}", method: :delete, class: "btn btn-outline-danger" %></td>
+            <td><%= link_to "編集", edit_score_sheet_path(score_sheet.id), class: "btn btn-outline-success btn-sm" %></td>
+            <td><%= link_to "削除", "/score_sheets/#{score_sheet.id}", method: :delete, class: "btn btn-outline-danger btn-sm" %></td>
           </tr>
         </tbody>
       <% end %>

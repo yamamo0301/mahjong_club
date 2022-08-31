@@ -7,22 +7,24 @@
       <div>
         <h2 class="fw-bold">プレイヤー編集</h2>
       </div>
-      <%= form_with model: @player, url:player_path, method: :patch do |f| %>
-        <div class="row">
-          <%= f.label :name, "プレイヤー名", class: "fw-bold" %>
-          <div class="col-6">
-            <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control" %>
+      <div class="card bg-transparent p-3">
+        <%= form_with model: @player, url:player_path, method: :patch do |f| %>
+          <div class="row">
+            <%= f.label :name, "プレイヤー名", class: "fw-bold" %>
+            <div class="col-6">
+              <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control" %>
+            </div>
+            <div class="col-6">
+              <%= f.submit "追加", class: "btn btn-outline-secondary" %>
+            </div>
           </div>
-          <div class="col-6">
-            <%= f.submit "追加", class: "btn btn-outline-secondary" %>
-          </div>
-        </div>
-      <% end %>
-      <div class="row text-center" style="margin-top: 20px;">
-        <%= link_to players_path do %>
-          <i class="bi bi-arrow-left-circle"></i>
-          <span>新規作成画面へ戻る</span>
         <% end %>
+        <div class="row text-center" style="margin-top: 20px;">
+          <%= link_to players_path do %>
+            <i class="bi bi-arrow-left-circle"></i>
+            <span>新規作成画面へ戻る</span>
+          <% end %>
+        </div>
       </div>
     </div>
 

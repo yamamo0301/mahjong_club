@@ -7,52 +7,54 @@
       <div>
         <h2 class="fw-bold">ルール編集</h2>
       </div>
-      <%= form_with model: @rule, url:rule_path, method: :patch do |f| %>
-        <div class="row">
-          <%= f.label :name, "ルール名", class: "fw-bold" %>
-          <%= f.text_field :name, autofocus: true, class: "form-control" %>
-        </div>
-        <div class="row">
-          <%= f.label :tip_point, "チップポイント", class: "fw-bold" %>
-          <%= f.text_field :tip_point, class: "form-control" %>
-        </div>
-        <div class="row">
-          <%= f.label :table_point, "テーブルポイント", class: "fw-bold" %>
-          <%= f.text_field :table_point, class: "form-control" %>
-        </div>
-        <div class="row">
-          <span class="fw-bold">テーブルポイント計算方法</span>
-          <div class="row">
-            <div class="col-2"></div>
-            <div class="col-8">
-              <div>
-                <%= f.radio_button :calculation_status, Rule.calculation_statuses.key(0) %>
-                <%= f.label :calculation_status, "計算しない" %>
-              </div>
-              <div>
-                <%= f.radio_button :calculation_status, Rule.calculation_statuses.key(1) %>
-                <%= f.label :calculation_status, "平等に引く" %>
-              </div>
-              <div>
-                <%= f.radio_button :calculation_status, Rule.calculation_statuses.key(2) %>
-                <%= f.label :calculation_status, "1位から引く" %>
-              </div>
-              <div>
-                <%= f.radio_button :calculation_status, Rule.calculation_statuses.key(3) %>
-                <%= f.label :calculation_status, "最下位から引く" %>
+      <div class="card bg-transparent p-3">
+        <%= form_with model: @rule, url:rule_path, method: :patch do |f| %>
+          <div class="row py-1">
+            <%= f.label :name, "ルール名", class: "fw-bold" %>
+            <%= f.text_field :name, autofocus: true, class: "form-control" %>
+          </div>
+          <div class="row py-1">
+            <%= f.label :tip_point, "チップポイント", class: "fw-bold" %>
+            <%= f.number_field :tip_point, class: "text-end form-control" %>
+          </div>
+          <div class="row py-1">
+            <%= f.label :table_point, "テーブルポイント", class: "fw-bold" %>
+            <%= f.number_field :table_point, class: "text-end form-control" %>
+          </div>
+          <div class="row py-1">
+            <span class="fw-bold">テーブルポイント計算方法</span>
+            <div class="row">
+              <div class="col-2"></div>
+              <div class="col-8">
+                <div class="form-check">
+                  <%= f.radio_button :calculation_status, Rule.calculation_statuses.key(0), class: "form-check-input", id: "calculation_status0" %>
+                  <%= f.label :calculation_status, "計算しない", class: "form-check-label", for: "calculation_status0" %>
+                </div>
+                <div class="form-check">
+                  <%= f.radio_button :calculation_status, Rule.calculation_statuses.key(1), class: "form-check-input", id: "calculation_status1" %>
+                  <%= f.label :calculation_status, "平等に引く", class: "form-check-label", for: "calculation_status1" %>
+                </div>
+                <div class="form-check">
+                  <%= f.radio_button :calculation_status, Rule.calculation_statuses.key(2), class: "form-check-input", id: "calculation_status2" %>
+                  <%= f.label :calculation_status, "1位から引く", class: "form-check-label", for: "calculation_status2" %>
+                </div>
+                <div class="form-check">
+                  <%= f.radio_button :calculation_status, Rule.calculation_statuses.key(3), class: "form-check-input", id: "calculation_status3" %>
+                  <%= f.label :calculation_status, "最下位から引く", class: "form-check-label", for: "calculation_status3" %>
+                </div>
               </div>
             </div>
           </div>
+          <div class="text-center d-grid gap-2 py-1">
+            <%= f.submit "更新", class: "btn btn-outline-secondary" %>
+          </div>
+        <% end %>
+        <div class="row text-center" style="margin-top: 20px;">
+          <%= link_to rules_path do %>
+            <i class="bi bi-arrow-left-circle"></i>
+            <span>ルール新規作成へ戻る</span>
+          <% end%>
         </div>
-        <div class="text-center d-grid gap-2">
-          <%= f.submit "更新", class: "btn btn-outline-secondary" %>
-        </div>
-      <% end %>
-      <div class="row text-center" style="margin-top: 20px;">
-        <%= link_to rules_path do %>
-          <i class="bi bi-arrow-left-circle"></i>
-          <span>ルール新規作成へ戻る</span>
-        <% end%>
       </div>
     </div>
 

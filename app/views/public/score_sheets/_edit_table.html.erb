@@ -1,7 +1,6 @@
-
-<table class="table table-bordered table table-striped">
+<table class="table table-bordered table-success table-striped">
   <tbody>
-    <tr class="table-info text-center" style="font-size: 12px;">
+    <tr class="table-warning text-center" style="font-size: 12px;">
       <th></th>
       <th>順位</th>
       <th>チップ</th>
@@ -18,7 +17,7 @@
           <td><%= count %></td>
           <td>
             <div>
-              <%= f.number_field :rank, min: 1, max: 4, style: "width: 40px", class: "text-end form-control form-control-sm" %>
+              <%= f.number_field :rank, min: 1, max: 4, style: "width: 45px", class: "text-end form-control form-control-sm" %>
               <span style="font-size: 12px;">位</span>
             </div>
           </td>
@@ -44,7 +43,7 @@
     <% end %>
   </tbody>
   <tfoot>
-    <tr class="table-warning text-end">
+    <tr class="table-info text-end">
       <td style="writing-mode: vertical-rl;">小計</td>
       <td></td>
       <td>

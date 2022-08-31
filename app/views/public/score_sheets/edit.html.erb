@@ -12,11 +12,18 @@
       </div>
     </div>
     <div class="col-5">
-      <table class="table table-bordered text-center">
+      <table class="table table-bordered table-success table-striped text-center">
         <tbody>
-          <tr class="table-info">
+          <tr class="table-warning">
             <th>適応ルール</th>
-            <th><%= @score_sheet.rule.name %></th>
+            <th>
+              <%= form_with model: @score_sheet, url: score_sheet_path(@score_sheet.id), method: :patch do |f| %>
+                <%= f.select :rule_id, options_from_collection_for_select(current_user.rules.all, :id, :name), {prompt: '選択してください'}, {class: "form-select"} %>
+                <%= button_tag(type: "submit", class: "btn btn-success btn-sm") do %>
+                  <i class="bi bi-arrow-clockwise"></i>
+                <% end %>
+              <% end %>
+            </th>
           </tr>
           <tr>
             <th>チップポイント</th>
@@ -40,7 +47,7 @@
             <h5 class="card-title">コメント:</h5>
             <p class="card-text text-center">
               <%= f.text_area :comment, class: "form-control" %>
-              <%= f.submit "更新", class: "btn btn-outline-secondary", style: "margin-top: 10px;" %>
+              <%= f.submit "更新", class: "btn btn-outline-success btn-sm", style: "margin-top: 10px;" %>
             </p>
           </div>
         </div>
@@ -51,7 +58,7 @@
   <div class="row">
     <table class="table table-bordered">
       <tbody>
-        <tr class="text-center table-success">
+        <tr class="text-center table-warning">
           <% @score_sheet.sheets.each do |sheet| %>
             <th colspan="3"><%= sheet.player.name %></th>
           <% end %>
@@ -83,7 +90,7 @@
               <%= score.hidden_field :score_sheet_id, value: sheet.score_sheet_id %>
               <%= score.hidden_field :player_id, value: sheet.player.id %>
               <div class="row">
-                <table class="table-bordered text-center">
+                <table class="table table-bordered table-striped text-center">
                   <thead class="table-light">
                     <tr>
                       <th>順位</th>
@@ -105,7 +112,7 @@
       <div class="row">
         <div class="col-4"></div>
         <div class="col-4 text-center d-grid gap-2">
-          <%= f.submit "追加", class: "btn btn-outline-secondary", style: "margin: 20px;" %>
+          <%= f.submit "追加", class: "btn btn-outline-secondary", style: "margin: 10px; margin-bottom: 200px;" %>
         </div>
       </div>
     <% end %>
