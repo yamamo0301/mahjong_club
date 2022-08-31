@@ -8,11 +8,18 @@
         <p>自分の近くに麻雀が好きな人がいないか探してみたり、</p>
         <p>もしいた場合はメッセージを送ってみたり、</p>
         <p>そんな事が出来るサイトです！</p>
-        <p>よろしければ会員登録をして利用してみてください！！</p>
-        <div class="p-3">
-          <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-primary" %>
-          <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-primary" %>
-        </div>
+        <% if user_signed_in? %>
+          <div class="p-3">
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger" %>
+          </div>
+        <% elsif admin_signed_in? %>
+        <% else %>
+          <p>よろしければ会員登録をして利用してみてください！！</p>
+          <div class="p-3">
+            <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-primary" %>
+            <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-primary" %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

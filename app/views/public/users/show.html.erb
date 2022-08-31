@@ -10,36 +10,36 @@
 
   <div class="row">
     <div class="col-4">
-      <div>
+      <div class="card bg-transparent p-3">
         <%= render 'user_show', user: @user %>
-      </div>
-      <div class="text-center">
         <% if @user.id == current_user.id %>
-          <%= link_to 'プロフィール編集', edit_user_path(@user.id), class: "btn btn-success" %>
+          <div class="text-center p-3">
+            <%= link_to 'プロフィール編集', edit_user_path(@user.id), class: "btn btn-outline-success" %>
+          </div>
         <% end %>
-      </div>
-      <div class="text-center">
         <% unless @user.id == current_user.id %>
-          <% if @is_room == true %>
-            <%= link_to 'メッセージへ', room_path(@room_id), class: "btn btn-success" %>
-          <% else %>
-            <%= form_with model: @room do |f| %>
-              <%= f.fields_for @entry do |e| %>
-                <% e.hidden_field :user_id, value: @user.id %>
+          <div class="text-center p-3">
+            <% if @is_room == true %>
+              <%= link_to 'メッセージへ', room_path(@room_id), class: "btn btn-outline-secondary" %>
+            <% else %>
+              <%= form_with model: @room do |f| %>
+                <%= f.fields_for @entry do |e| %>
+                  <% e.hidden_field :user_id, value: @user.id %>
+                <% end %>
+              <%= f.submit "メッセージを送る", class: "btn btn-outline-secondary" %>
               <% end %>
-            <%= f.submit "メッセージを送る", class: "btn btn-success" %>
             <% end %>
-          <% end %>
+          </div>
         <% end %>
       </div>
     </div>
 
     <% if @user.players.find_by(name: '自分').scores.empty? %>
-      <div class="col-4">
-        <p>保存されたスコアが存在しないため表示出来ません。</p>
+      <div class="col-8 text-center">
+        <p class="fw-bold text-danger">※保存されたスコアが存在しないため表示出来ません。</p>
       </div>
     <% else %>
-      <div class="col-4">
+      <!--<div class="col-4">-->
         <div style="width:300px; height:240px;">
           <p>過去10戦順位</p>
           <%= render 'line_graph', user: @my_user %>
@@ -48,7 +48,7 @@
           <p>順位比率</p>
           <%= render 'pie_graph', ranks_array: @ranks_array %>
         </div>
-      </div>
+      <!--</div>-->
 
       <div class="col-4">
         <div>

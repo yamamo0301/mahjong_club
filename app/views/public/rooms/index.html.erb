@@ -6,33 +6,42 @@
   </div>
 
   <div class="row">
-    <div class="col-4"></div>
-    <div class="col-4">
-      <% @another_entries.each do |entry| %>
-        <%= link_to room_path(entry.room) do %>
-          <div class="card bg-light bg-gradient">
-            <div class="card-body">
-              <div class="d-flex">
-                <div class="chat-avatar">
-                  <object>
-                    <%= link_to user_path(entry.user) do %>
-                      <p>
-                        <%= image_tag entry.user.get_icon(40,40), class: "border border-dark rounded-circle" %>
-                        <span><%= entry.user.name %></span>
-                      </p>
-                    <% end%>
-                    <p>
-                      <span>
-                        LastMessage : <%= Message.find_by(id: entry.room.message_ids.last)&.body %>
-                      </span>
-                    </p>
-                  </object>
-                </div>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
+    <div class="col-1"></div>
+    <div class="col-10">
+      <table class="table text-center">
+        <thead>
+          <th>アイコン</th>
+          <th>会員名</th>
+          <th>最終メッセージ</th>
+          <th></th>
+        </thead>
+        <tbody>
+          <% @another_entries.each do |entry| %>
+            <td>
+              <%= link_to user_path(entry.user) do %>
+                <%= image_tag entry.user.get_icon(30,30), class: "border border-dark rounded-circle" %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to user_path(entry.user) do %>
+                <span><%= entry.user.name %></span>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to room_path(entry.room) do %>
+                <%= Message.find_by(id: entry.room.message_ids.last)&.body %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to room_path(entry.room) do %>
+                <span>メッセージ履歴へ</span>
+                <i class="bi bi-arrow-right-circle"></i>
+              <% end %>
+            </td>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
+
 </div>

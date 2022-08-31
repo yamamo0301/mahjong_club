@@ -27,8 +27,8 @@
             </td>
             <td><%= score_sheet.rule.name %></td>
             <td><%= score_sheet.comment %></td>
-            <td><%= link_to "編集", edit_score_sheet_path(score_sheet.id), class: "btn btn-success" %></td>
-            <td><%= link_to "削除", "/score_sheets/#{score_sheet.id}", method: :delete, class: "btn btn-danger" %></td>
+            <td><%= link_to "編集", edit_score_sheet_path(score_sheet.id), class: "btn btn-outline-success" %></td>
+            <td><%= link_to "削除", "/score_sheets/#{score_sheet.id}", method: :delete, class: "btn btn-outline-danger" %></td>
           </tr>
         </tbody>
       <% end %>

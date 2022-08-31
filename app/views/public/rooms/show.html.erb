@@ -1,40 +1,59 @@
 <div class="container">
-  <div class="row">
-    <div class="col-1"></div>
 
+  <div class="row">
+    <h2 class="fw-bold">メッセージ</h2>
+  </div>
+
+  <div class="row">
     <div class="col-4">
-      <%= render '/public/users/user_show', user: @another_entry.user %>
+      <div class="card bg-transparent p-3">
+        <%= render '/public/users/user_show', user: @another_entry.user %>
+        <div class="text-center p-3">
+          <%= link_to user_path(@another_entry.user.id) do %>
+            <i class="bi bi-arrow-left-circle"></i>
+            <span>詳細ページに戻る</span>
+          <% end %>
+        </div>
+      </div>
     </div>
 
-    <div class="col-5">
-      <h2 class="fw-bold text-center">メッセージ</h2>
-      <% @messages.each do |m| %>
-        <% if m.user_id == current_user.id %>
-          <div class="speech-bubble">
-            <div class="sb-bubble sb-line3 sb-right">
-              <p><%= m.body %></p>
-            </div>
-          </div>
-        <% else %>
-          <div class="fukidasi">
+    <div class="col-6">
+      <h4 class="fw-bold text-center">
+        <%= "#{@another_entry.user.name}さんとのメッセージ" %>
+      </h4>
+      <div class="card bg-light p-3 example">
+        <% @messages.each do |m| %>
+          <% if m.user_id == current_user.id %>
             <p>
-              <%= image_tag @another_entry.user.get_icon(60,60), class: "border border-dark rounded-circle" %>
               <span class="speech-bubble">
-                <span class="sb-bubble sb-line3 sb-left">
+                <span class="sb-bubble sb-line3 sb-right">
                   <%= m.body %>
                 </span>
               </span>
             </p>
-          </div>
+          <% else %>
+            <div class="fukidasi">
+              <p>
+                <%= image_tag @another_entry.user.get_icon(30,30), class: "border border-dark rounded-circle sb-left" %>
+                <span class="speech-bubble">
+                  <span class="sb-bubble sb-line3 sb-left">
+                    <%= m.body %>
+                  </span>
+                </span>
+              </p>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
 
       <div class="row">
         <%= form_for @message do |f| %>
-          <div class="chat-form-group text-center">
-            <%= f.text_field :body, class: "form-control" %>
+          <div class="chat-form-group text-center p-1">
+            <%= f.text_area :body, class: "form-control" %>
             <%= f.hidden_field :room_id, :value => @room.id %>
-            <%= f.submit "送信する", class: "btn btn-outline-secondary" %>
+            <div class="text-center d-grid gap-2 p-1">
+              <%= f.submit "送信する", class: "btn btn-outline-secondary" %>
+            </div>
           </div>
         <% end %>
       </div>

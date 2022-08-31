@@ -37,9 +37,11 @@
           <span><%= f.text_area :introduction, class: "form-control" %></span>
         </p>
         <div class="text-center d-grid gap-2">
-          <%= f.submit :更新, class: "btn btn-primary" %>
+          <%= f.submit :更新, class: "btn btn-outline-primary" %>
         </div>
-        <%= link_to "退会する", users_unsubscribe_path %>
+        <div class="text-center d-grid gap-2" style="margin-top: 20px;">
+          <%= link_to "退会する", users_unsubscribe_path, class: "btn btn-outline-danger" %>
+        </div>
       </div>
     </div>
   <% end %>

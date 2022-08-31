@@ -13,49 +13,58 @@
           <div class="col-2">
             <%= f.submit :検索, class: "btn btn-outline-secondary" %>
           </div>
-          <div class="col-4">
-            <%= link_to "会員一覧へ戻る", users_path %>
-          </div>
         </div>
-      <% end %>
+       <% end %>
+      <div class="row">
+        <div class="p-1 text-center">
+          <%= link_to users_path do %>
+            <i class="bi bi-arrow-left-circle"></i>
+            <span>会員一覧へ戻る</span>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th>アイコン</th>
-        <th>会員名</th>
-        <th>都道府県</th>
-        <th>ステータス</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% users.each do |user|%>
-      <tr>
-        <td>
-          <%= image_tag user.get_icon(40,40), class: "border border-dark rounded-circle" %>
-        </td>
-        <td>
-          <%= link_to admin_user_path(user.id) do %>
-            <%= user.name %>
-          <% end %>
-        </td>
-        <td><%= user.prefecture.name %></td>
-        <td>
-          <div>
-            <% unless user == current_user %>
-              <% if current_user.following?(user) %>
-                <%= link_to "フォローを外す", user_relationships_path(user.id), method: :delete, class: "btn btn-warning" %>
-              <% else %>
-                <%= link_to "フォローする", user_relationships_path(user.id), method: :post, class: "btn btn-primary" %>
-              <% end %>
+  <div class="row">
+    <table class="table text-center">
+      <thead>
+        <tr>
+          <th>アイコン</th>
+          <th>会員名</th>
+          <th>都道府県</th>
+          <th>ステータス</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.each do |user|%>
+        <tr>
+          <td>
+            <%= link_to user_path(user.id) do %>
+              <%= image_tag user.get_icon(30,30), class: "border border-dark rounded-circle" %>
             <% end %>
-          </div>
-        </td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+          </td>
+          <td>
+            <%= link_to user_path(user.id) do %>
+              <%= user.name %>
+            <% end %>
+          </td>
+          <td><%= user.prefecture.name %></td>
+          <td>
+            <div>
+              <% unless user == current_user %>
+                <% if current_user.following?(user) %>
+                  <%= link_to "フォローを外す", user_relationships_path(user.id), method: :delete, class: "btn btn-outline-danger btn-sm" %>
+                <% else %>
+                  <%= link_to "フォローする", user_relationships_path(user.id), method: :post, class: "btn btn-outline-primary btn-sm" %>
+                <% end %>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
 </div>

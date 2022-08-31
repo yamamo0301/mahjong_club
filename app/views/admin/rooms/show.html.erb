@@ -18,28 +18,32 @@
     </div>
 
     <div class="col-6">
-      <h2 class="fw-bold"><%= "#{@another_entry.user.name}さんとのメッセージ" %></h2>
-      <div class="card bg-white p-3">
-      <% @messages.each do |m| %>
-        <% unless m.user_id == @another_entry.user.id %>
-          <div class="speech-bubble">
-            <div class="sb-bubble sb-line3 sb-right">
-              <p><%= m.body %></p>
-            </div>
-          </div>
-        <% else %>
-          <div class="fukidasi">
+      <h4 class="fw-bold text-center">
+        <%= "#{@another_entry.user.name}さんとのメッセージ" %>
+      </h4>
+      <div class="card bg-light p-3 example">
+        <% @messages.each do |m| %>
+          <% unless m.user_id == @another_entry.user.id %>
             <p>
-              <%= image_tag @another_entry.user.get_icon(30,30), class: "border border-dark rounded-circle sb-left" %>
               <span class="speech-bubble">
-                <span class="sb-bubble sb-line3 sb-left">
+                <span class="sb-bubble sb-line3 sb-right">
                   <%= m.body %>
                 </span>
               </span>
             </p>
-          </div>
+          <% else %>
+            <div class="fukidasi">
+              <p>
+                <%= image_tag @another_entry.user.get_icon(30,30), class: "border border-dark rounded-circle sb-left" %>
+                <span class="speech-bubble">
+                  <span class="sb-bubble sb-line3 sb-left">
+                    <%= m.body %>
+                  </span>
+                </span>
+              </p>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
       </div>
     </div>
   </div>

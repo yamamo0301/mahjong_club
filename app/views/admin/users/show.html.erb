@@ -23,37 +23,36 @@
       </div>
     </div>
 
-    <div class="col-3">
+    <div class="col-8">
       <h3 class="fw-bold">メッセージ履歴一覧</h3>
-      <% @another_entries.each do |entry| %>
-        <%= link_to admin_room_path(id: entry.room.id, user_id: @user.id) do %>
-          <div class="card bg-transparent">
-            <div class="card-body">
-              <div>
-                <div class="chat-avatar">
-                  <object>
-                    <%= link_to admin_user_path(entry.user) do %>
-                      <p>
-                        <%= image_tag entry.user.get_icon(70,70), class: "border border-dark rounded-circle" %>
-                        <span><%= entry.user.name %></span>
-                      </p>
-                    <% end%>
-                    <div class="card bg-transparent p-3">
-                      <p>
-                        <span>
-                          <i class="bi bi-envelope"></i>
-                          <%= Message.find_by(id: entry.room.message_ids.last)&.body %>
-                        </span>
-                      </p>
-                      <p class="text-end">メッセージ履歴へ<i class="bi bi-arrow-right-circle"></i></p>
-                    </div>
-                  </object>
-                </div>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
+      <table class="table text-center">
+        <thead>
+          <th>会員名</th>
+          <th>最終メッセージ</th>
+          <th></th>
+        </thead>
+        <tbody>
+          <% @another_entries.each do |entry| %>
+            <td>
+              <%= link_to admin_user_path(entry.user) do %>
+                <%= image_tag entry.user.get_icon(30,30), class: "border border-dark rounded-circle" %>
+                <span><%= entry.user.name %></span>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to admin_room_path(id: entry.room.id, user_id: @user.id) do %>
+                <%= Message.find_by(id: entry.room.message_ids.last)&.body %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to admin_room_path(id: entry.room.id, user_id: @user.id) do %>
+                <span>メッセージ履歴へ</span>
+                <i class="bi bi-arrow-right-circle"></i>
+              <% end %>
+            </td>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 
