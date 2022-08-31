@@ -19,7 +19,7 @@
       <td><%= rule.tip_point %>P</td>
       <td><%= rule.table_point %>P</td>
       <td><%= rule.calculation_status_i18n %></td>
-      <td><%= link_to "編集", edit_rule_path(rule.id) %></td>
+      <td><%= link_to "編集", edit_rule_path(rule.id), class: "btn btn-outline-success btn-sm" %></td>
     </tr>
   </tbody>
   <% end %>

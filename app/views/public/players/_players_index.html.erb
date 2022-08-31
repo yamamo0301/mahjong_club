@@ -2,7 +2,7 @@
   <h2 class="fw-bold">プレイヤー一覧</h2>
 </div>
 
-<table class="table">
+<table class="table text-center">
   <thead>
     <tr>
       <th>プレイヤー名</th>
@@ -13,7 +13,7 @@
   <tbody>
     <tr>
       <td><%= player.name %></td>
-      <td><%= link_to "編集", edit_player_path(player.id) %></td>
+      <td><%= link_to "編集", edit_player_path(player.id), class: "btn btn-outline-success btn-sm" %></td>
     </tr>
   </tbody>
   <% end %>
