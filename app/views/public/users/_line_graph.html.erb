@@ -18,11 +18,11 @@ document.addEventListener('turbolinks:load', function() {
       options: {
         // animation: false// アニメーションOFF
         scales: {
-          y: {
-            // min: 0,
-            // max: 5,
+          yAxes: {
+              ticks: {
+                  stepSize: 1,
+              },
             reverse: true
-            // beginAtZero: true// Y軸を0から始める
           }
         }
       }
