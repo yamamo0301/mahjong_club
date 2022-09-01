@@ -6,16 +6,16 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
 
-    unless @user.players.find_by(name: '自分').scores.empty?
-      @my_user = @user.players.find_by(name: '自分').scores.order("id DESC")
+    unless @user.players.find_by(myself_status: true).scores.empty?
+      @my_user = @user.players.find_by(myself_status: true).scores.order("id DESC")
       rank1 = @my_user.where(rank: 1).size
       rank2 = @my_user.where(rank: 2).size
       rank3 = @my_user.where(rank: 3).size
       rank4 = @my_user.where(rank: 4).size
       @ranks_array = [rank1, rank2, rank3, rank4]
-      @total_game = @user.players.find_by(name: '自分').scores.size
-      @average_rank = @user.players.find_by(name: '自分').scores.average(:rank).round(2)
-      @total_point = @user.players.find_by(name: '自分').scores.sum(:point)
+      @total_game = @user.players.find_by(myself_status: true).scores.size
+      @average_rank = @user.players.find_by(myself_status: true).scores.average(:rank).round(2)
+      @total_point = @user.players.find_by(myself_status: true).scores.sum(:point)
       @rank1_rate = rank1 * 100 / @my_user.size.to_f
       @rank2_rate = rank2 * 100 / @my_user.size.to_f
       @rank3_rate = rank3 * 100 / @my_user.size.to_f

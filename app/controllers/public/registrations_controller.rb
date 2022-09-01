@@ -14,6 +14,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
     super
     @user = User.new(profile_params)
     @user.players.build
+
     @user.save
   end
 
@@ -70,7 +71,17 @@ class Public::RegistrationsController < Devise::RegistrationsController
 
   private
 
+  # def sign_up_params
+    # ここに :age, :genderを追記
+    # params.permit(:name, :email, :myself_status, :password, :password_confirmation)
+  # end
+
+  # def configure_permitted_parameters
+    # devise_parameter_sanitizer.permit(:sign_up, keys: [:myself_status])
+  # end
+
   def profile_params
-    params.permit(:sign_up, keys: [:name, :prefecture_id, :municipality, players_attributes: [:name]])
+    params.permit(:sign_up, keys: [:name, :prefecture_id, :municipality, players_attributes: [:name, :myself_status]])
   end
+
 end

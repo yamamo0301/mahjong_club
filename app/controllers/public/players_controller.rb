@@ -1,6 +1,6 @@
 class Public::PlayersController < ApplicationController
   def index
-    @players = current_user.players.where.not(name: '自分')
+    @players = current_user.players.where.not(myself_status: true)
     @player = current_user.players.new
   end
 
@@ -15,7 +15,7 @@ class Public::PlayersController < ApplicationController
   end
 
   def edit
-    @players = current_user.players.where.not(name: '自分')
+    @players = current_user.players.where.not(myself_status: true)
     @player = current_user.players.find(params[:id])
   end
 

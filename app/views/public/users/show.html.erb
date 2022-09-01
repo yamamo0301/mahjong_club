@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <% if @user.players.find_by(name: '自分').scores.empty? %>
+    <% if @user.players.find_by(myself_status: true).scores.empty? %>
       <div class="col-8 text-center">
         <p class="fw-bold text-danger">※保存されたスコアが存在しないため表示出来ません。</p>
       </div>

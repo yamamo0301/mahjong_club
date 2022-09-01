@@ -18,7 +18,7 @@
             <th>適応ルール</th>
             <th>
               <%= form_with model: @score_sheet, url: score_sheet_path(@score_sheet.id), method: :patch do |f| %>
-                <%= f.select :rule_id, options_from_collection_for_select(current_user.rules.all, :id, :name), {prompt: '選択してください'}, {class: "form-select"} %>
+                <%= f.select :rule_id, options_from_collection_for_select(current_user.rules.all, :id, :name, {:selected => @score_sheet.rule_id}), {}, {class: "form-select"} %>
                 <%= button_tag(type: "submit", class: "btn btn-success btn-sm") do %>
                   <i class="bi bi-arrow-clockwise"></i>
                 <% end %>

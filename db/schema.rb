@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 2022_08_17_055732) do
   create_table "players", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "name", null: false
+    t.boolean "myself_status", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -1,25 +1,26 @@
 <canvas id="pie_graph"></canvas>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  var ctx = document.getElementById('pie_graph');
-  var myChart = new Chart(ctx, {
-      type: 'pie',
-      data: {
-        labels: ['1位', '2位', '3位', '4位'],
-        datasets: [{
-          backgroundColor: [
-            "#fff3cd",
-            "#cfe2ff",
-            "#d1e7dd",
-            "#f8d7da"
-          ],
-          borderColor: [
-            "#808080"
-          ],
-          data: <%= ranks_array %>
-        }]
-      },
-      options: {
-      }
+  document.addEventListener('turbolinks:load', function() {
+    var ctx = document.getElementById('pie_graph');
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: ['1位', '2位', '3位', '4位'],
+          datasets: [{
+            backgroundColor: [
+              "#fff3cd",
+              "#cfe2ff",
+              "#d1e7dd",
+              "#f8d7da"
+            ],
+            borderColor: [
+              "#808080"
+            ],
+            data: <%= ranks_array %>
+          }]
+        },
+        options: {
+        }
+    });
   });
 </script>
