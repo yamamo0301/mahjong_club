@@ -1,4 +1,6 @@
 class Public::PlayersController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @players = current_user.players.where.not(myself_status: true)
     @player = current_user.players.new

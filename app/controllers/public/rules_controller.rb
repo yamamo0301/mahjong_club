@@ -1,4 +1,6 @@
 class Public::RulesController < ApplicationController
+  before_action :authenticate_user!
+  
   def index
     @rules = current_user.rules.all
     @rule = current_user.rules.new

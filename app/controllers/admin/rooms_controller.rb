@@ -1,5 +1,5 @@
 class Admin::RoomsController < ApplicationController
-  before_action :move_to_signed_in
+  before_action :move_to_admin_signed_in
 
   def show
     @room = Room.find(params[:id])
@@ -14,7 +14,7 @@ class Admin::RoomsController < ApplicationController
 
   private
 
-  def move_to_signed_in
+  def move_to_admin_signed_in
     unless admin_signed_in?
       redirect_to  '/admin/sign_in'
     end

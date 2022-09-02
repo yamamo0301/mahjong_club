@@ -1,4 +1,6 @@
 class Public::ScoresController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     @score_form = Form::ScoreCollection.new(score_collection_params)
     @score_form.save

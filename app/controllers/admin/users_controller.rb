@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  before_action :move_to_signed_in
+  before_action :move_to_admin_signed_in
 
   def show
     @user = User.find(params[:id])
@@ -37,7 +37,10 @@ class Admin::UsersController < ApplicationController
     params.require(:user).permit(:is_deleted)
   end
 
-  def move_to_signed_in
+
+  protected
+
+  def move_to_admin_signed_in
     unless admin_signed_in?
       redirect_to  '/admin/sign_in'
     end

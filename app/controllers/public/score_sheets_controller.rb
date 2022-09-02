@@ -1,4 +1,6 @@
 class Public::ScoreSheetsController < ApplicationController
+  before_action :authenticate_user!
+
   def new
     @score_sheet = current_user.score_sheets.new
     @sheet_form = Form::SheetCollection.new
