@@ -1,6 +1,6 @@
 class Public::RulesController < ApplicationController
   before_action :authenticate_user!
-  
+
   def index
     @rules = current_user.rules.all
     @rule = current_user.rules.new
@@ -12,6 +12,7 @@ class Public::RulesController < ApplicationController
       flash[:notice] = '新しいルールを追加しました。'
       redirect_to rules_path
     else
+      @rules = current_user.rules.all
       render :index
     end
   end
@@ -27,6 +28,7 @@ class Public::RulesController < ApplicationController
       flash[:notice] = 'ルールを更新しました。'
       redirect_to rules_path
     else
+      @rules = current_user.rules.all
       render :edit
     end
   end

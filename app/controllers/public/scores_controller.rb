@@ -17,9 +17,7 @@ class Public::ScoresController < ApplicationController
   private
 
   def score_collection_params
-    params
-      .require(:form_score_collection)
-      .permit(scores_attributes: [:score_sheet_id, :player_id, :tip, :point, :rank] )
+    params.require(:form_score_collection).permit(scores_attributes: [:score_sheet_id, :player_id, :tip, :point, :rank])
   end
 
   def score_params

@@ -13,6 +13,11 @@ Rails.application.routes.draw do
   get 'about' => 'public/homes#about'
   get 'admin' => 'admin/homes#top'
 
+  # TODO : admin_sign_outのURLが直接リクエストされたときにadmin_sign_in画面へ遷移させるために記述
+  devise_scope :admin do
+    get 'admin/sign_out' => 'admin/sessions#access_authorizations'
+  end
+
   scope module: :public do
     get 'users/unsubscribe' => 'users#unsubscribe'
     patch 'users/withdraw' => 'users#withdraw'

@@ -56,6 +56,13 @@
           <% end%>
         </div>
       </div>
+      <% if @rule.errors.any? %>
+        <div class="text-center text-danger">
+          <% @rule.errors.full_messages.each do |message| %>
+            <p><%= message %></p>
+          <% end %>
+        </div>
+      <% end %>
     </div>
 
     <div class="col-6">

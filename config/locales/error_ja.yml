@@ -1,0 +1,14 @@
+ja:
+  activerecord:
+    attributes:
+      player:
+        name: 名前
+      rule:
+        name: 名前
+        tip_point: チップポイント
+        table_point: テーブルポイント
+        calculation_status: テーブルポイント計算方法
+      user:
+        name: 名前
+        prefecture_id: 都道府県
+        email: メールアドレス

@@ -26,6 +26,13 @@
           <% end %>
         </div>
       </div>
+      <% if @player.errors.any? %>
+        <div class="text-center text-danger">
+          <% @player.errors.full_messages.each do |message| %>
+            <p><%= message %></p>
+          <% end %>
+        </div>
+      <% end %>
     </div>
 
     <div class="col-4">

@@ -12,6 +12,7 @@ class Public::PlayersController < ApplicationController
       flash[:notice] = '新しいプレイヤーを追加しました。'
       redirect_to players_path
     else
+      @players = current_user.players.where.not(myself_status: true)
       render :index
     end
   end
@@ -27,6 +28,7 @@ class Public::PlayersController < ApplicationController
       flash[:notice] = 'プレイヤー名を更新しました。'
       redirect_to players_path
     else
+      @players = current_user.players.where.not(myself_status: true)
       render :edit
     end
   end

@@ -30,8 +30,6 @@ class Public::SessionsController < Devise::SessionsController
     user_path(current_user.id)
   end
 
-
-  protected
   # TODO : 退会しているかを判断するメソッド
   def user_state
     # TODO : 入力されたemailからアカウントを1件取得

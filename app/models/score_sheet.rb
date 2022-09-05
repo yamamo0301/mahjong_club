@@ -4,6 +4,7 @@ class ScoreSheet < ApplicationRecord
   has_many :sheets, dependent: :destroy
   has_many :scores, dependent: :destroy
 
+  validates :rule_id, presence: true
 
   def table_point_calculation(player)
     if rule.calculation_status == "subtraction_evenness"

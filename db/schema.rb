@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_17_055732) do
+ActiveRecord::Schema.define(version: 2022_09_04_124522) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -124,6 +124,7 @@ ActiveRecord::Schema.define(version: 2022_08_17_055732) do
     t.integer "player_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["score_sheet_id", "player_id"], name: "index_sheets_on_score_sheet_id_and_player_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
