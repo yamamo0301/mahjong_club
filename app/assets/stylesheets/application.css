@@ -22,7 +22,7 @@
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-position: center center;
-  background-image: url(top.png);
+  background-image: image-url("top.png");
 }
 
 .speech-bubble {
