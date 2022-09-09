@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   # TODO : ユーザーにプロフィール画像を持たせるため。
   has_one_attached :icon
-  
+
   belongs_to :prefecture
   has_many :rules, dependent: :destroy
   has_many :players, dependent: :destroy
@@ -17,7 +17,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :players
   has_many :entries, dependent: :destroy
   has_many :messages, dependent: :destroy
-  
+
   # フォロー、フォロワー機能について
     # class_nameがないと、relationshipsテーブルとreverse_of_relationshipsテーブルを探しに行ってしまう。しかしその２つのテーブルは存在しない。
     # なのでclass_name: "Relationship"でRelationshipモデルを参照。Relationshipsテーブルからデータを取得。
@@ -35,7 +35,7 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true
   validates :prefecture_id, presence: true
-  
+
   # フォロー、フォロワー機能について
     # フォローしたときの処理
   def follow(user_id)
@@ -50,7 +50,7 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
-  # TODO : Rails内でプロフィール画像を処理させる。
+  # Rails内でプロフィール画像を処理させる。
   def get_icon(width, height)
     unless icon.attached?
       file_path = Rails.root.join('app/assets/images/no_image.png')

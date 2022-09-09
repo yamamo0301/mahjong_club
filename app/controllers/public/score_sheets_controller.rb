@@ -66,11 +66,12 @@ class Public::ScoreSheetsController < ApplicationController
   end
 
   def score_sheet_update_params
-    params.require(:score_sheet).permit(:rule_id,:comment)
+    params.require(:score_sheet).permit(:rule_id, :comment)
   end
 
   def sheet_collection_params
     # models/form/sheet_collection.rbを利用しSheetモデルにplayer_idのパラメータだけ送りたいので、sheets_attributes内にplayer_idを記述。
     params.require(:form_sheet_collection).permit(sheets_attributes: :player_id)
   end
+
 end

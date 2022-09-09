@@ -16,14 +16,12 @@ class Public::ScoresController < ApplicationController
 
   private
 
+  # models/form/score_collection.rbを利用しScoreモデルに指定のパラメータだけ送りたいので、scores_attributes内に５つのカラムを記述。
   def score_collection_params
     params.require(:form_score_collection).permit(scores_attributes: [:score_sheet_id, :player_id, :tip, :point, :rank])
   end
 
   def score_params
-    params.require(:score).permit(
-      :rank,
-      :tip,
-      :point)
+    params.require(:score).permit(:rank, :tip, :point)
   end
 end

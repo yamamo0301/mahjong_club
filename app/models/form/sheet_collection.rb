@@ -21,8 +21,9 @@ class Form::SheetCollection < Form::Base
   def save(score_sheet)
     # transaction do以降の処理の中１つが失敗した場合、SQL処理を全部ロールバックするためにtransactionを使用。
     Sheet.transaction do
-       # sheets内の配列１つ１つに渡されていた値をsave!していく。
+      # sheets内の配列１つ１つにscore_sheet_idを渡していく。
       self.sheets.each { |sheet| sheet.score_sheet_id = score_sheet.id }
+      # sheets内の配列１つ１つに渡されていた値をsave!していく。
       self.sheets.map(&:save!)
     end
       return true
