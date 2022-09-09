@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
   # TODO : ユーザーにプロフィール画像を持たせるため。
   has_one_attached :icon
+  
   belongs_to :prefecture
   has_many :rules, dependent: :destroy
   has_many :players, dependent: :destroy
@@ -16,26 +17,35 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :players
   has_many :entries, dependent: :destroy
   has_many :messages, dependent: :destroy
-  # フォローをした、されたの関係
+  
+  # フォロー、フォロワー機能について
+    # class_nameがないと、relationshipsテーブルとreverse_of_relationshipsテーブルを探しに行ってしまう。しかしその２つのテーブルは存在しない。
+    # なのでclass_name: "Relationship"でRelationshipモデルを参照。Relationshipsテーブルからデータを取得。
+    # foreign_keyで参照するカラムを指定。
+      # 「フォローをした」の関係
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+      # 「フォローをされた」の関係
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
-  # 一覧画面で使う
+    # 一覧画面で使う
+      # user.followingsという記述でフォローしているユーザーを一覧表示したいので、throughでrelationshipsテーブルを通し、sourceでfollowedカラムを指定し参照。
   has_many :followings, through: :relationships, source: :followed
+      # user.followersという記述でフォロワーしてくれているユーザーを一覧表示したいので、throughでrelationshipsテーブルを通し、sourceでfollowerカラムを指定し参照。
   has_many :followers, through: :reverse_of_relationships, source: :follower
 
   validates :name, presence: true
   validates :email, presence: true
   validates :prefecture_id, presence: true
-
-  # フォローしたときの処理
+  
+  # フォロー、フォロワー機能について
+    # フォローしたときの処理
   def follow(user_id)
     relationships.create(followed_id: user_id)
   end
-  # フォローを外すときの処理
+    # フォローを外すときの処理
   def unfollow(user_id)
     relationships.find_by(followed_id: user_id).destroy
   end
-  # フォローしているか判定
+    # フォローしているか判定
   def following?(user)
     followings.include?(user)
   end

@@ -14,7 +14,6 @@ class Public::RegistrationsController < Devise::RegistrationsController
     super
     @user = User.new(profile_params)
     @user.players.build
-
     @user.save
   end
 
@@ -81,6 +80,8 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # end
 
   def profile_params
+    # 新規登録時に自分のプレイヤーを自動で作成したいためplayers_attributesを記述
+    # myself_statusでプレイヤーが自分かどうか判別している。
     params.permit(:sign_up, keys: [:name, :prefecture_id, :municipality, players_attributes: [:name, :myself_status]])
   end
 

@@ -3,15 +3,15 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-
     # ログインユーザー所属ルームID取得
     # ログインユーザーがやりとりしているroomのIDをすべて取得しそれを配列化してmy_room_idとしている。
     current_entries = @user.entries
+    # 空の配列を渡してあげる。
     my_room_id = []
     current_entries.each do |entry|
       my_room_id << entry.room.id
     end
-    # 自分のroom_idでuser_idが自分じゃないのを取得
+    # 自分のroom_idでuser_idが自分では無いものを取得。
     @another_entries = Entry.where(room_id: my_room_id).where.not(user_id: @user.id)
   end
 
