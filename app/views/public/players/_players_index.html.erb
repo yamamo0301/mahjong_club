@@ -9,12 +9,12 @@
       <th></th>
     </tr>
   </thead>
-  <% players.each do |player| %>
   <tbody>
-    <tr>
-      <td><%= player.name %></td>
-      <td><%= link_to "編集", edit_player_path(player.id), class: "btn btn-outline-success btn-sm" %></td>
-    </tr>
+    <% players.each do |player| %>
+      <tr>
+        <td><%= player.name %></td>
+        <td><%= link_to "編集", edit_player_path(player.id), class: "btn btn-outline-success btn-sm" %></td>
+      </tr>
+    <% end %>
   </tbody>
-  <% end %>
 </table>

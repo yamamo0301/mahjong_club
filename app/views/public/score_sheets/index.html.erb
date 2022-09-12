@@ -16,8 +16,8 @@
           <th></th>
         </tr>
       </thead>
-      <% @score_sheets.each do |score_sheet| %>
-        <tbody>
+      <tbody>
+        <% @score_sheets.each do |score_sheet| %>
           <tr class="text-center">
             <td><%= link_to score_sheet.created_at.strftime("%Y-%m-%d"), score_sheet_path(score_sheet.id), class: "btn btn-outline-success btn-sm" %></td>
             <td>
@@ -30,8 +30,8 @@
             <td><%= link_to "編集", edit_score_sheet_path(score_sheet.id), class: "btn btn-outline-success btn-sm" %></td>
             <td><%= link_to "削除", "/score_sheets/#{score_sheet.id}", method: :delete, class: "btn btn-outline-danger btn-sm" %></td>
           </tr>
-        </tbody>
-      <% end %>
+        <% end %>
+      </tbody>
     </table>
   </div>
 
