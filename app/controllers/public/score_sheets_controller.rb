@@ -23,13 +23,16 @@ class Public::ScoreSheetsController < ApplicationController
     @score_sheet = current_user.score_sheets.new(score_sheet_params)
     # 「Form::SheetCollection」についてはmodels/form/sheet_collection.rb内に詳しく記述しました。
     @sheet_form = Form::SheetCollection.new(sheet_collection_params)
-    # ScoreSheetモデルにレコードを作成すると同時にSheetモデルにもレコードを作成するためsaveした際に両方がtrueかどうか確認。
-    if @score_sheet.save && @sheet_form.save(@score_sheet)
+    # ScoreSheetモデルにレコードを作成すると同時にSheetモデルにもレコードを作成するためsaveメソッドがtrueではない場合ロールバックする。
+    ScoreSheet.transaction do
+      @score_sheet.save!
+      @sheet_form.save(@score_sheet)
+    end
       redirect_to edit_score_sheet_path(@score_sheet)
-    else
+    # @score_sheet.save!を使用しているためtrueではない場合rescueでキャッチ。
+    rescue => e
       flash[:alert] = "スコアシート作成に失敗しました。"
       render :new
-    end
   end
 
   def edit

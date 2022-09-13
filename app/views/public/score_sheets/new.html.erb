@@ -6,31 +6,34 @@
 
   <div class="card bg-transparent p-3">
     <%= form_with model: [@score_sheet, @sheet_form], url: score_sheets_path, method: :post do |f| %>
-    <div class="row text-center">
-      <h4 class="fw-bold">メンバー選択</h4>
-      <div class="col-2"></div>
-      <% n = 0 %>
-      <%= f.fields_for :sheets do |i| %>
+      <div class="row text-center">
+        <h4 class="fw-bold">メンバー選択</h4>
+        <div class="col-2"></div>
+        <% n = 0 %>
+        <%= f.fields_for :sheets do |i| %>
+          <div class="col-2">
+            <div class="fw-bold"><%= n += 1 %>人目</div>
+            <%= i.select :player_id, options_from_collection_for_select(current_user.players.all, :id, :name), {prompt: '選択してください'}, {class: "form-select"} %>
+          </div>
+        <% end %>
+      </div>
+      <div class="row text-center" style="margin-top: 20px;">
+        <h4 class="fw-bold">ルール選択</h4>
+        <div class="col-5"></div>
         <div class="col-2">
-          <div class="fw-bold"><%= n += 1 %>人目</div>
-          <%= i.select :player_id, options_from_collection_for_select(current_user.players.all, :id, :name), {prompt: '選択してください'}, {class: "form-select"} %>
+          <%= f.select :rule_id, options_from_collection_for_select(current_user.rules.all, :id, :name), {prompt: '選択してください'}, {class: "form-select"}%>
         </div>
-      <% end %>
-    </div>
-    <div class="row text-center" style="margin-top: 20px;">
-      <h4 class="fw-bold">ルール選択</h4>
-      <div class="col-5"></div>
-      <div class="col-2">
-        <%= f.select :rule_id, options_from_collection_for_select(current_user.rules.all, :id, :name), {prompt: '選択してください'}, {class: "form-select"}%>
       </div>
-    </div>
-    <div class="row text-center" style="margin-top: 20px;">
-      <div class="col-4"></div>
-      <div class="col-4 text-center d-grid gap-2">
-        <%= f.submit "作成", class: "btn btn-outline-secondary" %>
+      <div class="row text-center" style="margin-top: 20px;">
+        <div class="col-4"></div>
+        <div class="col-4 text-center d-grid gap-2">
+          <%= f.submit "作成", class: "btn btn-outline-secondary" %>
+        </div>
       </div>
-    </div>
     <% end %>
+  </div>
+  <div>
+    <p id="alert" class=" text-danger text-center"><%= alert %></p>
   </div>
 
 </div>
