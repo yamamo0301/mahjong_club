@@ -33,23 +33,25 @@
         </thead>
         <tbody>
           <% @another_entries.each do |entry| %>
-            <td>
-              <%= link_to admin_user_path(entry.user) do %>
-                <%= image_tag entry.user.get_icon(30,30), class: "border border-dark rounded-circle" %>
-                <span><%= entry.user.name %></span>
-              <% end %>
-            </td>
-            <td>
-              <%= link_to admin_room_path(id: entry.room.id, user_id: @user.id) do %>
-                <%= Message.find_by(id: entry.room.message_ids.last)&.body %>
-              <% end %>
-            </td>
-            <td>
-              <%= link_to admin_room_path(id: entry.room.id, user_id: @user.id) do %>
-                <span>メッセージ履歴へ</span>
-                <i class="bi bi-arrow-right-circle"></i>
-              <% end %>
-            </td>
+            <tr>
+              <td>
+                <%= link_to admin_user_path(entry.user) do %>
+                  <%= image_tag entry.user.get_icon(30,30), class: "border border-dark rounded-circle" %>
+                  <span><%= entry.user.name %></span>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to admin_room_path(id: entry.room.id, user_id: @user.id) do %>
+                  <%= Message.find_by(id: entry.room.message_ids.last)&.body %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to admin_room_path(id: entry.room.id, user_id: @user.id) do %>
+                  <span>メッセージ履歴へ</span>
+                  <i class="bi bi-arrow-right-circle"></i>
+                <% end %>
+              </td>
+            </tr>
           <% end %>
         </tbody>
       </table>
