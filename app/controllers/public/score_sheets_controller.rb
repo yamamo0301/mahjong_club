@@ -40,10 +40,10 @@ class Public::ScoreSheetsController < ApplicationController
     # 「Form::ScoreCollection」についてはmodels/form/score_collection.rb内に詳しく記述しました。
     @score_form = Form::ScoreCollection.new
     # 1つのscore_sheetの中に4つのsheetが同時に作成される。そこから各プレイヤーのIDを割り出しインスタンスに収納している。
-    @player1 = @score_sheet.sheets.take(1).map(&:player_id)
-    @player2 = @score_sheet.sheets.take(2).drop(1).map(&:player_id)
-    @player3 = @score_sheet.sheets.take(3).drop(2).map(&:player_id)
-    @player4 = @score_sheet.sheets.drop(3).map(&:player_id)
+    @player1 = @score_sheet.sheets.order(created_at: :desc).take(1).map(&:player_id)
+    @player2 = @score_sheet.sheets.order(created_at: :desc).take(2).drop(1).map(&:player_id)
+    @player3 = @score_sheet.sheets.order(created_at: :desc).take(3).drop(2).map(&:player_id)
+    @player4 = @score_sheet.sheets.order(created_at: :desc).drop(3).map(&:player_id)
   end
 
   def update

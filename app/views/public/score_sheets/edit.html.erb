@@ -87,7 +87,7 @@
         <div>
           <p id="alert" class=" text-danger text-center"><%= alert %></p>
         </div>
-        <% @score_sheet.sheets.each do |sheet| %>
+        <% @score_sheet.sheets.order(created_at: :desc).each do |sheet| %>
           <div class="col-md-3">
             <%= f.fields_for :scores do |score| %>
               <%= score.hidden_field :score_sheet_id, value: sheet.score_sheet_id %>
