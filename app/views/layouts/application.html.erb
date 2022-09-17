@@ -38,6 +38,24 @@
                 </div>
               </li>
               <li>
+                <%= link_to user_path(current_user.id), class: "nav-link px-2 text-white" do %>
+                  <i class="bi bi-person fs-3"></i>
+                  <div>マイページ</div>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to user_followings_path(current_user.id), class: "nav-link px-2 text-white" do %>
+                  <i class="bi bi-people fs-3"></i>
+                  <div>友人一覧</div>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to rooms_path, class: "nav-link px-2 text-white" do %>
+                  <i class="bi bi-chat-left-dots fs-3"></i>
+                  <div>メッセージ一覧</div>
+                <% end %>
+              </li>
+              <li>
                 <%= link_to new_score_sheet_path, class: "nav-link px-2 text-white" do %>
                   <i class="bi bi-file-earmark-plus fs-3"></i>
                   <div>成績作成</div>
@@ -59,24 +77,6 @@
                 <%= link_to rules_path, class: "nav-link px-2 text-white" do %>
                   <i class="bi bi-book fs-3"></i>
                   <div>ルール作成</div>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to user_path(current_user.id), class: "nav-link px-2 text-white" do %>
-                  <i class="bi bi-person fs-3"></i>
-                  <div>マイページ</div>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to user_followings_path(current_user.id), class: "nav-link px-2 text-white" do %>
-                  <i class="bi bi-people fs-3"></i>
-                  <div>友人一覧</div>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to rooms_path, class: "nav-link px-2 text-white" do %>
-                  <i class="bi bi-chat-left-dots fs-3"></i>
-                  <div>メッセージ一覧</div>
                 <% end %>
               </li>
               <li>
