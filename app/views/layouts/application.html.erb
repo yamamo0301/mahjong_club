@@ -17,123 +17,128 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
 
-  <body class="background-image">
-    <div class="bg-success bg-gradient sticky-top">
-      <div class="container">
-        <header class="d-flex justify-content-center py-3">
-          <a class="align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none" href="/">
-            <div class="logo">
-              <span class="fs-1 fw-bold text-white">
-                麻雀倶楽部
-              </span>
-            </div>
+  <body class="background-image d-flex flex-column vh-100">
+    <header class="sticky-top">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <a class="navbar-brand p-3" href="/">
+            <span class="logo">麻雀倶楽部</span>
           </a>
-          <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 text-white text-center">
-            <% if user_signed_in? %>
-              <li>
-                <div class="nav-link px-2">
-                  <strong class="nav-link fw-bold text-white" style="font-size: 12px;">
-                    ようこそ<br><%= current_user.name %>さん
-                  </strong>
-                </div>
-              </li>
-              <li>
-                <%= link_to user_path(current_user.id), class: "nav-link px-2 text-white" do %>
-                  <i class="bi bi-person fs-3"></i>
-                  <div>マイページ</div>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to user_followings_path(current_user.id), class: "nav-link px-2 text-white" do %>
-                  <i class="bi bi-people fs-3"></i>
-                  <div>友人一覧</div>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to rooms_path, class: "nav-link px-2 text-white" do %>
-                  <i class="bi bi-chat-left-dots fs-3"></i>
-                  <div>メッセージ一覧</div>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to new_score_sheet_path, class: "nav-link px-2 text-white" do %>
-                  <i class="bi bi-file-earmark-plus fs-3"></i>
-                  <div>成績作成</div>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to score_sheets_path, class: "nav-link px-2 text-white" do %>
-                  <i class="bi bi-files fs-3"></i>
-                  <div>成績一覧</div>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to players_path, class: "nav-link px-2 text-white" do %>
-                  <i class="bi bi-person-plus fs-3"></i>
-                  <div>プレイヤー作成</div>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to rules_path, class: "nav-link px-2 text-white" do %>
-                  <i class="bi bi-book fs-3"></i>
-                  <div>ルール作成</div>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to about_path, class: "nav-link px-2 text-white" do %>
-                  <i class="bi bi-exclamation-circle fs-3"></i>
-                  <div>about</div>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to destroy_user_session_path, method: :delete, class: "nav-link px-2 text-white" do %>
-                  <i class="bi bi-box-arrow-right fs-3"></i>
-                  <div>ログアウト</div>
-                <% end %>
-              </li>
-            <% elsif admin_signed_in? %>
-              <li>
-                <%= link_to admin_path, class: "nav-link px-2 text-white" do %>
-                  <i class="bi bi-people fs-3"></i>
-                  <div>会員一覧</div>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to about_path, class: "nav-link px-2 text-white" do %>
-                  <i class="bi bi-exclamation-circle fs-3"></i>
-                  <div>about</div>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link px-2 text-white" do %>
-                  <i class="bi bi-box-arrow-right fs-3"></i>
-                  <div>ログアウト</div>
-                <% end %>
-              </li>
-            <% else %>
-              <li>
-                <%= link_to about_path, class: "nav-link px-2 text-white" do %>
-                  <i class="bi bi-exclamation-circle fs-3"></i>
-                  <div>about</div>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to new_user_registration_path, class: "nav-link px-2 text-white" do %>
-                  <i class="bi bi-pencil-square fs-3"></i>
-                  <div>新規登録</div>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to new_user_session_path, class: "nav-link px-2 text-white" do %>
-                  <i class="bi bi-box-arrow-in-right fs-3"></i>
-                  <div> ログイン</div>
-                <% end %>
-              </li>
-            <% end %>
-          </ul>
-        </header>
-      </div>
-    </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <% if user_signed_in? %>
+                <li class="nav-item">
+                  <%= link_to new_score_sheet_path, class: "nav-link" do %>
+                    <i class="bi bi-file-earmark-plus"></i>
+                    <span>成績作成</span>
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to score_sheets_path, class: "nav-link" do %>
+                    <i class="bi bi-files"></i>
+                    <span>成績一覧</span>
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to players_path, class: "nav-link" do %>
+                    <i class="bi bi-person-plus"></i>
+                    <span>プレイヤー作成</span>
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to rules_path, class: "nav-link" do %>
+                    <i class="bi bi-book"></i>
+                    <span>ルール作成</span>
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to about_path, class: "nav-link" do %>
+                    <i class="bi bi-exclamation-circle"></i>
+                    <span>About</span>
+                  <% end %>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-circle"></i>
+                    <span><%= current_user.name %></span>
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li>
+                      <%= link_to user_path(current_user.id), class: "dropdown-item" do %>
+                        <i class="bi bi-person"></i>
+                        <span>マイページ</span>
+                      <% end %>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                      <%= link_to user_followings_path(current_user.id), class: "dropdown-item" do %>
+                        <i class="bi bi-people"></i>
+                        <span>友人一覧</span>
+                      <% end %>
+                    </li>
+                    <li>
+                      <%= link_to rooms_path, class: "dropdown-item" do %>
+                        <i class="bi bi-chat-left-dots"></i>
+                        <span>メッセージ一覧</span>
+                      <% end %>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                      <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>ログアウト</span>
+                      <% end %>
+                    </li>
+                  </ul>
+                </li>
+              <% elsif admin_signed_in? %>
+                <li class="nav-item">
+                  <%= link_to admin_path, class: "nav-link" do %>
+                    <i class="bi bi-people"></i>
+                    <span>会員一覧</span>
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to about_path, class: "nav-link" do %>
+                    <i class="bi bi-exclamation-circle"></i>
+                    <span>About</span>
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link" do %>
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>ログアウト</span>
+                  <% end %>
+                </li>
+              <% else %>
+                <li class="nav-item">
+                  <%= link_to about_path, class: "nav-link" do %>
+                    <i class="bi bi-exclamation-circle"></i>
+                    <span class="btn-toggle">About</span>
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to new_user_registration_path, class: "nav-link" do %>
+                    <i class="bi bi-pencil-square"></i>
+                    <span>新規登録</span>
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to new_user_session_path, class: "nav-link" do %>
+                    <i class="bi bi-box-arrow-in-right"></i>
+                    <span>ログイン</span>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
 
     <main>
       <p id="notice" class="text-success text-center"><%= notice %></p>
