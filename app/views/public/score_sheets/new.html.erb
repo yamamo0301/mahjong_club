@@ -4,14 +4,14 @@
     <h2 class="fw-bold">スコアシート作成</h2>
   </div>
 
-  <div class="card bg-transparent p-3">
+  <div class="card bg-transparent p-3 shadow">
     <%= form_with model: [@score_sheet, @sheet_form], url: score_sheets_path, method: :post do |f| %>
       <div class="row text-center">
-        <h4 class="fw-bold">メンバー選択</h4>
-        <div class="col-2"></div>
+        <h4 class="fw-bold">プレイヤー選択</h4>
+        <div class="col-lg-2"></div>
         <% n = 0 %>
         <%= f.fields_for :sheets do |i| %>
-          <div class="col-2">
+          <div class="col-lg-2 col-sm-6 mb-3">
             <div class="fw-bold"><%= n += 1 %>人目</div>
             <%= i.select :player_id, options_from_collection_for_select(current_user.players.all, :id, :name), {prompt: '選択してください'}, {class: "form-select"} %>
           </div>
@@ -19,8 +19,8 @@
       </div>
       <div class="row text-center" style="margin-top: 20px;">
         <h4 class="fw-bold">ルール選択</h4>
-        <div class="col-5"></div>
-        <div class="col-2">
+        <div class="col-lg-5 col-sm-3"></div>
+        <div class="col-lg-2 col-sm-6">
           <%= f.select :rule_id, options_from_collection_for_select(current_user.rules.all, :id, :name), {prompt: '選択してください'}, {class: "form-select"}%>
         </div>
       </div>

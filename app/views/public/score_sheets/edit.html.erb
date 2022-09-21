@@ -4,14 +4,14 @@
   </div>
 
   <div class="row">
-    <div class="col-1"></div>
-    <div class="col-2">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-2 mb-3">
       <h4><%= @score_sheet.created_at.strftime("%Y-%m-%d") %>作成</h4>
       <div>
         <%= link_to "詳細画面へ", score_sheet_path(@score_sheet), class: "btn btn-outline-success" %>
       </div>
     </div>
-    <div class="col-5">
+    <div class="col-lg-5">
       <table class="table table-bordered table-success table-striped text-center">
         <tbody>
           <tr class="table-warning">
@@ -40,7 +40,7 @@
         </tbody>
       </table>
     </div>
-    <div class="col-3">
+    <div class="col-lg-3 mb-3">
       <%= form_with model: @score_sheet, url: score_sheet_path(@score_sheet.id), method: :patch do |f| %>
         <div class="row card bg-light bg-gradient">
           <div class="card-body">
@@ -88,7 +88,7 @@
           <p id="alert" class=" text-danger text-center"><%= alert %></p>
         </div>
         <% @score_sheet.sheets.order(created_at: :desc).each do |sheet| %>
-          <div class="col-md-3">
+          <div class="col-lg-3">
             <%= f.fields_for :scores do |score| %>
               <%= score.hidden_field :score_sheet_id, value: sheet.score_sheet_id %>
               <%= score.hidden_field :player_id, value: sheet.player.id %>

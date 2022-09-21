@@ -4,14 +4,14 @@
   </div>
 
   <div class="row">
-    <div class="col-1"></div>
-    <div class="col-2">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-2 mb-3">
       <h4><%= @score_sheet.created_at.strftime("%Y-%m-%d") %>作成</h4>
       <div>
         <%= link_to "編集画面へ", edit_score_sheet_path(@score_sheet), class: "btn btn-outline-success" %>
       </div>
     </div>
-    <div class="col-5">
+    <div class="col-lg-5">
       <table class="table table-bordered table-success table-striped text-center">
         <tbody>
           <tr class="table-warning">
@@ -33,7 +33,7 @@
         </tbody>
       </table>
     </div>
-    <div class="col-3">
+    <div class="col-lg-3 mb-3">
       <div class="row card bg-light bg-gradient">
         <div class="card-body">
           <h5 class="card-title">コメント:</h5>
