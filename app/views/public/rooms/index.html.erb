@@ -26,17 +26,17 @@
                 <% end %>
               </td>
               <td>
-                <%= link_to user_path(entry.user) do %>
+                <%= link_to user_path(entry.user), class: "link-success" do %>
                   <span><%= entry.user.name %></span>
                 <% end %>
               </td>
               <td>
-                <%= link_to room_path(entry.room) do %>
+                <%= link_to room_path(entry.room), class: "link-success" do %>
                   <%= Message.find_by(id: entry.room.message_ids.last)&.body %>
                 <% end %>
               </td>
               <td>
-                <%= link_to room_path(entry.room) do %>
+                <%= link_to room_path(entry.room), class: "link-success" do %>
                   <span>メッセージ履歴へ</span>
                   <i class="bi bi-arrow-right-circle"></i>
                 <% end %>

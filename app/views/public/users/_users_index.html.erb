@@ -1,14 +1,14 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-3">
+    <div class="col-lg-3 col-5">
       <h2 class="fw-bold">会員一覧</h2>
     </div>
-    <div class="col-4">
+    <div class="col-lg-4 col-7">
       <%= form_with url: search_users_path, method: :get, local: true do |f| %>
         <div class="row">
           <div class="col-6">
-              <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {include_blank: "---"}, class: "form-select") %>
+              <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {include_blank: "地域選択"}, class: "form-select") %>
           </div>
           <div class="col-2">
             <%= f.submit :検索, class: "btn btn-outline-secondary" %>
@@ -17,7 +17,7 @@
        <% end %>
       <div class="row">
         <div class="p-1 text-center">
-          <%= link_to users_path do %>
+          <%= link_to users_path, class: "link-success" do %>
             <i class="bi bi-arrow-left-circle"></i>
             <span>会員一覧へ戻る</span>
           <% end %>
@@ -45,7 +45,7 @@
               <% end %>
             </td>
             <td>
-              <%= link_to user_path(user.id) do %>
+              <%= link_to user_path(user.id), class: "link-success" do %>
                 <%= user.name %>
               <% end %>
             </td>

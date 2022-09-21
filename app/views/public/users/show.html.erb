@@ -9,8 +9,8 @@
   </div>
 
   <div class="row">
-    <div class="col-4">
-      <div class="card bg-transparent p-3">
+    <div class="col-lg-4 mb-5">
+      <div class="card bg-transparent p-3 shadow">
         <%= render 'user_show', user: @user %>
         <% if @user.id == current_user.id %>
           <div class="text-center p-3">
@@ -35,14 +35,14 @@
     </div>
 
     <% if @user.players.find_by(myself_status: true).scores.empty? %>
-      <div class="col-8 text-center">
+      <div class="col-lg-8 text-center">
         <p class="fw-bold text-danger">※保存されたスコアが存在しないため表示出来ません。</p>
       </div>
     <% else %>
-      <div class="col-8">
-        <div class="card bg-transparent p-3" style="margin-bottom: 50px;">
+      <div class="col-lg-8">
+        <div class="card bg-transparent p-3 shadow mb-5">
           <div class="row">
-            <div class="col-6">
+            <div class="col-sm-6">
               <h4 class="text-center fw-bold">直近10戦の順位</h4>
               <%= render 'line_graph', user: @my_user %>
               <div style="margin-top: 30px;">
@@ -88,7 +88,7 @@
                 </table>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-sm-6">
               <h4 class="text-center fw-bold">順位比率<h4>
               <%= render 'pie_graph', ranks_array: @ranks_array %>
             </div>
