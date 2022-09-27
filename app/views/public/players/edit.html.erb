@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
 
-    <div class="col-3"></div>
+    <<div class="col-lg-3"></div>
 
-    <div class="col-3">
+    <div class="col-lg-3 col-sm-5 mb-5">
       <div>
         <h2 class="fw-bold">プレイヤー編集</h2>
       </div>
@@ -20,7 +20,7 @@
           </div>
         <% end %>
         <div class="row text-center" style="margin-top: 20px;">
-          <%= link_to players_path do %>
+          <%= link_to players_path, class: "link-success" do %>
             <i class="bi bi-arrow-left-circle"></i>
             <span>新規作成画面へ戻る</span>
           <% end %>
@@ -35,7 +35,7 @@
       <% end %>
     </div>
 
-    <div class="col-4">
+    <div class="col-lg-4 col-sm-7">
       <%= render 'players_index', players: @players %>
     </div>
   </div>

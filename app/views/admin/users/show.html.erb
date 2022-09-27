@@ -5,8 +5,8 @@
   </div>
 
   <div class="row">
-    <div class="col-4">
-      <div class="card bg-transparent p-3">
+    <div class="col-lg-4 mb-3">
+      <div class="card bg-transparent p-3 shadow">
         <%= render 'user_show', user: @user %>
         <div class="text-center fw-bold" style="margin-top: 10px;">
           <%= form_with model: @user, url: admin_user_path do |f| %>
@@ -17,13 +17,13 @@
               <%= f.radio_button :is_deleted, true %>
               <%= f.label :is_deleted, '退会', value: true %>
             </p>
-            <p><%= f.submit "変更を保存", class: "btn btn-outline-primary" %></p>
+            <p><%= f.submit "変更を保存", class: "btn btn-outline-success" %></p>
           <% end %>
         </div>
       </div>
     </div>
 
-    <div class="col-8">
+    <div class="col-lg-8">
       <h3 class="fw-bold">メッセージ履歴一覧</h3>
       <table class="table text-center">
         <thead>
@@ -35,18 +35,18 @@
           <% @another_entries.each do |entry| %>
             <tr>
               <td>
-                <%= link_to admin_user_path(entry.user) do %>
+                <%= link_to admin_user_path(entry.user), class: "link-success" do %>
                   <%= image_tag entry.user.get_icon(30,30), class: "border border-dark rounded-circle" %>
                   <span><%= entry.user.name %></span>
                 <% end %>
               </td>
               <td>
-                <%= link_to admin_room_path(id: entry.room.id, user_id: @user.id) do %>
+                <%= link_to admin_room_path(id: entry.room.id, user_id: @user.id), class: "link-success" do %>
                   <%= Message.find_by(id: entry.room.message_ids.last)&.body %>
                 <% end %>
               </td>
               <td>
-                <%= link_to admin_room_path(id: entry.room.id, user_id: @user.id) do %>
+                <%= link_to admin_room_path(id: entry.room.id, user_id: @user.id), class: "link-success" do %>
                   <span>メッセージ履歴へ</span>
                   <i class="bi bi-arrow-right-circle"></i>
                 <% end %>

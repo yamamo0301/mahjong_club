@@ -1,13 +1,13 @@
 <div class="container">
   <div class="row">
 
-    <div class="col-2"></div>
+    <div class="col-lg-2"></div>
 
-    <div class="col-3">
+    <div class="col-lg-3 mb-5">
       <div>
         <h2 class="fw-bold">ルール新規作成</h2>
       </div>
-      <div class="card bg-transparent p-3">
+      <div class="card bg-transparent p-3 shadow">
         <%= form_with model: @rule, url:rules_path, method: :post do |f| %>
           <div class="row py-1">
             <%= f.label :name, "ルール名", class: "fw-bold" %>
@@ -59,7 +59,7 @@
       <% end %>
     </div>
 
-    <div class="col-6">
+    <div class="col-lg-6 mb-5">
       <%= render 'rule_index', rules: @rules %>
     </div>
 

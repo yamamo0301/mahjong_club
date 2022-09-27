@@ -5,18 +5,19 @@
   </div>
 
   <div class="row">
-    <div class="col-4">
-      <div class="card bg-transparent p-3">
+    <div class="col-lg-4 mb-3">
+      <div class="card bg-transparent p-3 shadow">
         <%= render '/admin/users/user_show', user: @user %>
         <div class="text-center p-3">
-          <%= link_to admin_user_path(@user.id) do %>
+          <%= link_to admin_user_path(@user.id), class: "link-success" do %>
             <i class="bi bi-arrow-left-circle"></i>
             <span>詳細ページに戻る</span>
           <% end %>
         </div>
       </div>
     </div>
-    <div class="col-6">
+    
+    <div class="col-lg-6 mb-5">
       <h4 class="fw-bold text-center">
         <%= "#{@another_entry.user.name}さんとのメッセージ" %>
       </h4>

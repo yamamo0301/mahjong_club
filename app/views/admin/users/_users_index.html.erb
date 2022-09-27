@@ -1,14 +1,14 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-3">
+    <div class="col-4">
       <h2 class="fw-bold">会員一覧</h2>
     </div>
-    <div class="col-4">
+    <div class="col-lg-5 col-8">
       <%= form_with url: search_admin_users_path, method: :get, local: true do |f| %>
         <div class="row">
           <div class="col-6">
-              <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {include_blank: "選択してください"}, class: "form-select") %>
+              <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {include_blank: "地域選択"}, class: "form-select") %>
           </div>
           <div class="col-6">
             <%= f.submit :検索, class: "btn btn-outline-secondary" %>

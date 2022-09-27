@@ -6,8 +6,8 @@
 
   <%= form_with model: @user, url: user_session_path do |f| %>
     <div class="row">
-      <div class="col-4"></div>
-      <div class="col-4">
+      <div class="col-lg-4 col-sm-2"></div>
+      <div class="col-lg-4 col-sm-8">
         <p>
           <%= f.label :email, "メールアドレス", class: "fw-bold" %><br />
           <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
@@ -23,7 +23,7 @@
           </p>
         <% end %>
         <div class="text-center d-grid gap-2">
-          <%= f.submit "ログイン", class: "btn btn-outline-primary" %>
+          <%= f.submit "ログイン", class: "btn btn-outline-success" %>
         </div>
       </div>
     </div>

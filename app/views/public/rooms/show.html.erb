@@ -5,11 +5,11 @@
   </div>
 
   <div class="row">
-    <div class="col-4">
-      <div class="card bg-transparent p-3">
+    <div class="col-lg-4 mb-3">
+      <div class="card bg-transparent p-3 shadow">
         <%= render '/public/users/user_show', user: @another_entry.user %>
         <div class="text-center p-3">
-          <%= link_to user_path(@another_entry.user.id) do %>
+          <%= link_to user_path(@another_entry.user.id), class: "link-success" do %>
             <i class="bi bi-arrow-left-circle"></i>
             <span>詳細ページに戻る</span>
           <% end %>
@@ -17,11 +17,11 @@
       </div>
     </div>
 
-    <div class="col-6">
+    <div class="col-lg-6 mb-5">
       <h4 class="fw-bold text-center">
         <%= "#{@another_entry.user.name}さんとのメッセージ" %>
       </h4>
-      <div class="card bg-light p-3 example">
+      <div class="card bg-light p-3 example shadow">
         <% @messages.each do |m| %>
           <% if m.user_id == current_user.id %>
             <p>
