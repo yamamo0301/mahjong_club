@@ -8,7 +8,7 @@
     </tr>
     <% count = 0 %>
     <% score_sheet.scores.where(player_id: player).each do |score| %>
-      <tr class="text-end">
+      <tr class="text-end player-table">
         <% count += 1 %>
         <td><%= count %></td>
         <td>

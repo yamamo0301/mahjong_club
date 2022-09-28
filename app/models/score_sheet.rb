@@ -9,11 +9,11 @@ class ScoreSheet < ApplicationRecord
   # ruleで選択した計算方法を行うためのメソッド。
   def table_point_calculation(player)
     if rule.calculation_status == "subtraction_evenness"
-      "TP#{scores.where(player_id: player).size * -(rule.table_point)}P"
+      "TP #{scores.where(player_id: player).size * -(rule.table_point)}P"
     elsif rule.calculation_status == "subtraction_top"
-      "TP#{scores.where(player_id: player, rank: 1).size * -(rule.table_point)}P"
+      "TP #{scores.where(player_id: player, rank: 1).size * -(rule.table_point)}P"
     elsif rule.calculation_status == "subtraction_bottom"
-      "TP#{scores.where(player_id: player, rank: 4).size * -(rule.table_point)}P"
+      "TP #{scores.where(player_id: player, rank: 4).size * -(rule.table_point)}P"
     else
       "TP0P"
     end
