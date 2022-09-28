@@ -16,12 +16,12 @@
         </div>
       </div>
     </div>
-    
+
     <div class="col-lg-6 mb-5">
       <h4 class="fw-bold text-center">
         <%= "#{@another_entry.user.name}さんとのメッセージ" %>
       </h4>
-      <div class="card bg-light p-3 example">
+      <div class="card bg-light p-3 message-box">
         <% @messages.each do |m| %>
           <% unless m.user_id == @another_entry.user.id %>
             <p>
