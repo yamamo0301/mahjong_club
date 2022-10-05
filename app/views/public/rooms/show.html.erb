@@ -21,7 +21,7 @@
       <h4 class="fw-bold text-center">
         <%= "#{@another_entry.user.name}さんとのメッセージ" %>
       </h4>
-      <div class="card bg-light p-3 shadow message-box">
+      <div class="card bg-light p-3 example shadow">
         <% @messages.each do |m| %>
           <% if m.user_id == current_user.id %>
             <p>

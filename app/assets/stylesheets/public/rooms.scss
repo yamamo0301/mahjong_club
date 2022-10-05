@@ -100,8 +100,8 @@
   width: .5em;
 }
 
-.message-box {
+div.example {
   width: 100%;
   height: 400px;
-  overflow: auto;
+  overflow: scroll;
 }
