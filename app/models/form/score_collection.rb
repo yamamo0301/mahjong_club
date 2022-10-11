@@ -24,9 +24,9 @@ class Form::ScoreCollection < Form::Base
       # scores内の配列１つ１つに渡されていた値をsave!していく。
       self.scores.map(&:save!)
     end
-      return true
+    true
     # save!を使用しているためtrueではない場合recue節へ。
     rescue => e
-      return false
+      false
   end
 end

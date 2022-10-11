@@ -28,7 +28,7 @@ class Public::ScoreSheetsController < ApplicationController
       @score_sheet.save!
       @sheet_form.save(@score_sheet)
     end
-      redirect_to edit_score_sheet_path(@score_sheet)
+    redirect_to edit_score_sheet_path(@score_sheet)
     # @score_sheet.save!を使用しているためtrueではない場合rescueでキャッチ。
     rescue => e
       flash[:alert] = "スコアシート作成に失敗しました。"
@@ -60,21 +60,19 @@ class Public::ScoreSheetsController < ApplicationController
 
 
   private
+    def score_sheet_params
+      # Viewでfields_forを使用してform_sheet_collectionにパラメータを送るため。
+      params.require(:form_sheet_collection).permit(
+        :rule_id,
+        form_sheet_collection_attributes: :player_id)
+    end
 
-  def score_sheet_params
-    # Viewでfields_forを使用してform_sheet_collectionにパラメータを送るため。
-    params.require(:form_sheet_collection).permit(
-      :rule_id,
-      form_sheet_collection_attributes: :player_id)
-  end
+    def score_sheet_update_params
+      params.require(:score_sheet).permit(:rule_id, :comment)
+    end
 
-  def score_sheet_update_params
-    params.require(:score_sheet).permit(:rule_id, :comment)
-  end
-
-  def sheet_collection_params
-    # models/form/sheet_collection.rbを利用しSheetモデルにplayer_idのパラメータだけ送りたいので、sheets_attributes内にplayer_idを記述。
-    params.require(:form_sheet_collection).permit(sheets_attributes: :player_id)
-  end
-
+    def sheet_collection_params
+      # models/form/sheet_collection.rbを利用しSheetモデルにplayer_idのパラメータだけ送りたいので、sheets_attributes内にplayer_idを記述。
+      params.require(:form_sheet_collection).permit(sheets_attributes: :player_id)
+    end
 end

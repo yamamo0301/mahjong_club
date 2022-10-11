@@ -42,47 +42,44 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # end
 
   protected
+    # If you have extra params to permit, append them to the sanitizer.
+    # def configure_sign_up_params
+    #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
+    # end
 
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
-  # end
+    # If you have extra params to permit, append them to the sanitizer.
+    # def configure_account_update_params
+    #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
+    # end
 
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-  # end
+    # The path used after sign up.
+    # def after_sign_up_path_for(resource)
+    #   super(resource)
+    # end
 
-  # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+    # The path used after sign up for inactive accounts.
+    # def after_inactive_sign_up_path_for(resource)
+    #   super(resource)
+    # end
 
-  # The path used after sign up for inactive accounts.
-  # def after_inactive_sign_up_path_for(resource)
-  #   super(resource)
-  # end
-
-  def after_sign_up_path_for(resource)
-    user_path(current_user.id)
-  end
+    def after_sign_up_path_for(resource)
+      user_path(current_user.id)
+    end
 
 
   private
-
-  # def sign_up_params
+    # def sign_up_params
     # ここに :age, :genderを追記
     # params.permit(:name, :email, :myself_status, :password, :password_confirmation)
-  # end
+    # end
 
-  # def configure_permitted_parameters
+    # def configure_permitted_parameters
     # devise_parameter_sanitizer.permit(:sign_up, keys: [:myself_status])
-  # end
+    # end
 
-  def profile_params
-    # 新規登録時に自分のプレイヤーを自動で作成したいためplayers_attributesを記述
-    # myself_statusでプレイヤーが自分かどうか判別している。
-    params.permit(:sign_up, keys: [:name, :prefecture_id, :municipality, players_attributes: [:name, :myself_status]])
-  end
-
+    def profile_params
+      # 新規登録時に自分のプレイヤーを自動で作成したいためplayers_attributesを記述
+      # myself_statusでプレイヤーが自分かどうか判別している。
+      params.permit(:sign_up, keys: [:name, :prefecture_id, :municipality, players_attributes: [:name, :myself_status]])
+    end
 end

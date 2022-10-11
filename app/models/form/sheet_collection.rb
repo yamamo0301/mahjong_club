@@ -9,7 +9,7 @@ class Form::SheetCollection < Form::Base
     super attributes
     # unless~present?を使用してattributesのオブジェクト内に値が存在場合はfalseを返すあげる。（Form::SheetCollection.new(…)としたい為）
     # FORM_COUNTが持つ数値から順に-1しつつ配列に代入しSheet.newを与えてあげる。（self = Form::SheetCollection）
-      self.sheets = FORM_COUNT.times.map { Sheet.new() } unless self.sheets.present?
+    self.sheets = FORM_COUNT.times.map { Sheet.new() } unless self.sheets.present?
   end
 
   # 上でsuper attributesとしているのでinitializeの処理が行われる。
@@ -30,9 +30,9 @@ class Form::SheetCollection < Form::Base
       # sheets内の配列１つ１つに渡されていた値をsave!していく。
       self.sheets.map(&:save!)
     end
-      return true
+    true
     # save!を使用した為trueではない場合recue節となるが、コントローラー内でtransactionを使用している。なのでrescueで例外をキャッチしてしまうとロールバックしない。
     # rescue => e
-      # return false
+    # return false
   end
 end

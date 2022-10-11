@@ -24,20 +24,19 @@ class Admin::SessionsController < Devise::SessionsController
   end
 
   protected
-
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_in_params
+    # If you have extra params to permit, append them to the sanitizer.
+    # def configure_sign_in_params
     # devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
-  # end
+    # end
 
-   # TODO : admin_sign_outのURLが直接リクエストされたときにadmin_sign_in画面へ遷移させるために記述
-  def admin_sign_out
-    request.url.include?("/admin/sign_out")
-  end
-   # TODO : admin_sign_outのURLが直接リクエストされたときにadmin_sign_in画面へ遷移させるために記述
-  def move_to_admin_signed_in
-    unless admin_signed_in?
-      redirect_to  '/admin/sign_in'
+    # TODO : admin_sign_outのURLが直接リクエストされたときにadmin_sign_in画面へ遷移させるために記述
+    def admin_sign_out
+      request.url.include?("/admin/sign_out")
     end
-  end
+    # TODO : admin_sign_outのURLが直接リクエストされたときにadmin_sign_in画面へ遷移させるために記述
+    def move_to_admin_signed_in
+      unless admin_signed_in?
+        redirect_to "/admin/sign_in"
+      end
+    end
 end

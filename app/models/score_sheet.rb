@@ -23,5 +23,4 @@ class ScoreSheet < ApplicationRecord
   def total_point(player)
     scores.where(player_id: player).sum(:tip) * rule.tip_point + scores.where(player_id: player).sum(:point)
   end
-
 end

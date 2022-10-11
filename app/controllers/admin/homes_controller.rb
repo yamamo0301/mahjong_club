@@ -7,10 +7,9 @@ class Admin::HomesController < ApplicationController
 
 
   private
-
-  def move_to_admin_signed_in
-    unless admin_signed_in?
-      redirect_to  '/admin/sign_in'
+    def move_to_admin_signed_in
+      unless admin_signed_in?
+        redirect_to "/admin/sign_in"
+      end
     end
-  end
 end
