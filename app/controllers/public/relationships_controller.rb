@@ -1,7 +1,7 @@
 class Public::RelationshipsController < ApplicationController
   before_action :authenticate_user!
 
-   # フォローをするとき。
+  # フォローをするとき。
   def create
     current_user.follow(params[:user_id])
     redirect_to request.referer
@@ -23,5 +23,4 @@ class Public::RelationshipsController < ApplicationController
     # followersについてはuser.rbに記述
     @users = user.followers
   end
-
 end

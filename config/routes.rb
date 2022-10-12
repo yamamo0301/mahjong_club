@@ -1,26 +1,25 @@
 Rails.application.routes.draw do
-
   devise_for :users, skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: "public/sessions"
   }
-  devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  root to: 'public/homes#top'
-  get 'about' => 'public/homes#about'
-  get 'admin' => 'admin/homes#top'
+  root to: "public/homes#top"
+  get "about" => "public/homes#about"
+  get "admin" => "admin/homes#top"
 
   # TODO : admin_sign_outのURLが直接リクエストされたときにadmin_sign_in画面へ遷移させるために記述
   devise_scope :admin do
-    get 'admin/sign_out' => 'admin/sessions#access_authorizations'
+    get "admin/sign_out" => "admin/sessions#access_authorizations"
   end
 
   scope module: :public do
-    get 'users/unsubscribe' => 'users#unsubscribe'
-    patch 'users/withdraw' => 'users#withdraw'
+    get "users/unsubscribe" => "users#unsubscribe"
+    patch "users/withdraw" => "users#withdraw"
 
     resources :rules,        only: [:index, :create, :edit, :update]
     resources :players,      only: [:index, :create, :edit, :update]
@@ -31,8 +30,8 @@ Rails.application.routes.draw do
     resources :users,        only: [:index, :show, :edit, :update] do
       get :search, on: :collection
       resource :relationships, only: [:create, :destroy]
-      get 'followings' => 'relationships#followings', as: 'followings'
-      get 'followers'  => 'relationships#followers',  as: 'followers'
+      get "followings" => "relationships#followings", as: "followings"
+      get "followers"  => "relationships#followers",  as: "followers"
     end
   end
 

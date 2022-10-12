@@ -9,7 +9,7 @@ class Public::PlayersController < ApplicationController
   def create
     @player = current_user.players.new(player_params)
     if @player.save
-      flash[:notice] = '新しいプレイヤーを追加しました。'
+      flash[:notice] = "新しいプレイヤーを追加しました。"
       redirect_to players_path
     else
       @players = current_user.players.where.not(myself_status: true)
@@ -25,7 +25,7 @@ class Public::PlayersController < ApplicationController
   def update
     @player = current_user.players.find(params[:id])
     if @player.update(player_params)
-      flash[:notice] = 'プレイヤー名を更新しました。'
+      flash[:notice] = "プレイヤー名を更新しました。"
       redirect_to players_path
     else
       @players = current_user.players.where.not(myself_status: true)
@@ -35,8 +35,7 @@ class Public::PlayersController < ApplicationController
 
 
   private
-
-  def player_params
-    params.require(:player).permit(:name)
-  end
+    def player_params
+      params.require(:player).permit(:name)
+    end
 end

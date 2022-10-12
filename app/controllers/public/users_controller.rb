@@ -86,16 +86,14 @@ class Public::UsersController < ApplicationController
 
 
   private
-
-  def user_params
-    params.require(:user).permit(
-      :icon,
-      :name,
-      :prefecture_id,
-      :municipality,
-      :email,
-      :introduction
+    def user_params
+      params.require(:user).permit(
+        :icon,
+        :name,
+        :prefecture_id,
+        :municipality,
+        :email,
+        :introduction
       )
-  end
-
+    end
 end

@@ -32,18 +32,15 @@ class Admin::UsersController < ApplicationController
 
 
   private
-
-  def user_params
-    params.require(:user).permit(:is_deleted)
-  end
+    def user_params
+      params.require(:user).permit(:is_deleted)
+    end
 
 
   protected
-
-  def move_to_admin_signed_in
-    unless admin_signed_in?
-      redirect_to  '/admin/sign_in'
+    def move_to_admin_signed_in
+      unless admin_signed_in?
+        redirect_to "/admin/sign_in"
+      end
     end
-  end
-
 end
