@@ -11,7 +11,7 @@
 
 ### テーマを選んだ理由
 個人的に麻雀が好きでよく行います。
-麻雀特有は人数が集まらなければ出来ないという問題があります。その問題を解決出来ればと思い、専用のコミニュティサイトの製作に着手しました。
+しかし麻雀は人数が集まらなければ出来ないという問題があります。その問題を解決出来ればと思い、専用のコミニュティサイトの製作に着手しました。
 麻雀は性別問わず世代間交流を行うことが可能であり、コミュニケーションツールとしてとても優秀です。
 このコミュニティサイトを通じて繋がり、その後も良好な関係が続く一助となれば幸いです。
 
@@ -36,11 +36,11 @@ ER図
 
 ## 開発環境
 - OS：Amazon Linux release 2 (Karoo)
-- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- 言語：HTML,CSS,JavaScript,Ruby
 - フレームワーク：Ruby on Rails, Rubocop
 - CSSフレームワーク：Bootstrap
 - テストフレームワーク：RSpec
-- JSライブラリ：jQuery
+- JSライブラリ：jQuery Chart.js
 - IDE：Cloud9
 - AWS(EC2/EIP/AMI/RDS), Ngninx, puma
 - その他のツールなど：SQL, Flexbox
