@@ -14,18 +14,12 @@ describe 'トップ画面のテスト' do
       it 'root_pathが"/"であるか' do
         expect(current_path).to eq('/')
       end
-    end
-  end
-
-  before do
-    visit about_path
-  end
-  context '表示の確認' do
-    it 'about画面(about_path)に「このサイトについて」が表示されているか' do
-      expect(page).to have_content 'このサイトについて'
-    end
-    it 'about_pathが"/about"であるか' do
-      expect(current_path).to eq('/about')
+      it '新規登録ボタンが表示されているか' do
+        expect(page).to have_link '新規登録'
+      end
+      it 'ログインボタンが表示されているか' do
+        expect(page).to have_link 'ログイン'
+      end
     end
   end
 
