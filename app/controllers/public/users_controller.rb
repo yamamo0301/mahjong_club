@@ -8,8 +8,9 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     # ユーザー作成時に同時に作成されたユーザー自身のプレイヤーに関連付けられたScoreモデルにレコードがある場合グラフなどを表示させるための記述。
-    unless @user.players.find_by(myself_status: true).scores.empty?
-      @my_user = @user.players.find_by(myself_status: true).scores.order("id DESC")
+    @player = @user.players.find_by(myself_status: true)
+    if @player && @player.scores.present?
+      @my_user = @player.scores.order("id DESC")
       # Chart.jsの円グラフで順位の比率を表示するために配列を渡す。
       rank1 = @my_user.where(rank: 1).size
       rank2 = @my_user.where(rank: 2).size
