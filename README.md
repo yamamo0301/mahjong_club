@@ -34,6 +34,9 @@
 ER図
 ><https://drive.google.com/file/d/1FQCog7iQIuX89FiK_Mkspul2SJC38o7s/view?usp=sharing>
 
+AWSインフラ設計書
+><https://docs.google.com/spreadsheets/d/1dYeAt8ANhCLWjWxsMvTu77VoK-SVf9918uvHUTl1nRo/edit?usp=sharing>
+
 ## 開発環境
 - OS：Amazon Linux release 2 (Karoo)
 - 言語：HTML,CSS,JavaScript,Ruby
