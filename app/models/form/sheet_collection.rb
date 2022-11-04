@@ -7,12 +7,13 @@ class Form::SheetCollection < Form::Base
   # sheets_collection_paramsに値が入っていた場合は、「= {}」は無視される。
   def initialize(attributes = {})
     super attributes
-    # unless~present?を使用してattributesのオブジェクト内に値が存在場合はfalseを返すあげる。（Form::SheetCollection.new(…)としたい為）
+    # unless~present?を使用してattributesのオブジェクト内に値が存在場合はfalseを返してあげる。（Form::SheetCollection.new(…)としたい為）
     # FORM_COUNTが持つ数値から順に-1しつつ配列に代入しSheet.newを与えてあげる。（self = Form::SheetCollection）
+    # present? = 変数の存在をチェック
     self.sheets = FORM_COUNT.times.map { Sheet.new() } unless self.sheets.present?
   end
 
-  # 上でsuper attributesとしているのでinitializeの処理が行われる。
+  # 上でsuper attributesとしているのでinitializeの処理が行われる。(インスタンスが生成される際に読み込まれる)
   def sheets_attributes=(attributes)
     # 配列においてキーの値をSheet.newに引数として渡す。
     self.sheets = attributes.map { |_, v| Sheet.new(v) }
@@ -20,6 +21,7 @@ class Form::SheetCollection < Form::Base
 
   def save(score_sheet)
     # transaction do以降の処理の中１つが失敗した場合、SQL処理を全部ロールバックするためにtransactionを使用。
+    # 今回4つのレコードを保存するにあたってplayer_idがnillだったものが仮に1つあった場合、残り3つを保存したくないためです。
     Sheet.transaction do
       self.sheets.each do |sheet|
         # sheet内のplayer_idがnilでなければRollbackされる。

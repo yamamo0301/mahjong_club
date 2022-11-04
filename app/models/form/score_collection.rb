@@ -9,6 +9,7 @@ class Form::ScoreCollection < Form::Base
     super attributes
     # unless~present?を使用してattributesのオブジェクト内に値が存在場合はfalseを返すあげる。（Form::ScoreCollection.new(…)としたい為）
     # FORM_COUNTが持つ数値から順に-1しつつ配列に代入しScore.newを与えてあげる。（self = Form::ScoreCollection）
+    # present? = 変数の存在をチェック
     self.scores = FORM_COUNT.times.map { Score.new() } unless self.scores.present?
   end
 
